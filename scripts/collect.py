@@ -409,13 +409,26 @@ def collect_films(target_count: int = 600) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Writing — Longform RSS + New Yorker Fiction RSS + Poetry Foundation
+# Writing — spec §5.1 v1.2: 3 parallel paths
+#   Path 1: modern essays/articles via aggregated RSS (7 publications)
+#   Path 2: classic essay collections via Gutendex (Project Gutenberg)
+#   Path 3: individual poems via PoetryDB
 # ---------------------------------------------------------------------------
 
-LONGFORM_RSS = "https://longform.org/feed"
-NEW_YORKER_FICTION_RSS = "https://www.newyorker.com/feed/magazine/fiction"
-POETRY_FOUNDATION_BROWSE = "https://www.poetryfoundation.org/poems/browse"
 USER_AGENT = "wave-recsys/0.1 (academic project; contact: cnguoyifei@gmail.com)"
+
+WRITING_RSS_FEEDS: List[Tuple[str, str]] = [
+    ("Aeon", "https://aeon.co/feed.rss"),
+    ("Literary Hub", "https://lithub.com/feed/"),
+    ("The Paris Review", "https://www.theparisreview.org/blog/feed/"),
+    ("The Atlantic Ideas", "https://www.theatlantic.com/feed/channel/ideas/"),
+    ("Longform.org", "https://longform.org/feed"),
+    ("Granta", "https://granta.com/feed/"),
+    ("Public Books", "https://www.publicbooks.org/feed/"),
+]
+
+GUTENDEX_URL = "https://gutendex.com/books/"
+POETRYDB_BASE = "https://poetrydb.org"
 
 
 def _strip_html(html_text: str) -> str:
@@ -445,26 +458,18 @@ def _word_count(text: str) -> int:
     return len(text.split()) if text else 0
 
 
-def _fetch_rss_items(
-    rss_url: str,
-    target: int,
-    item_type: str,
-    publication: str,
-    fallback_creator: str = "",
-) -> List[Dict[str, Any]]:
-    """Generic RSS fetch returning normalized writing items (no id, no popularity)."""
-    feed = feedparser.parse(rss_url, agent=USER_AGENT)
+def _fetch_one_rss(publication: str, url: str, max_items: int = 60) -> List[Dict[str, Any]]:
+    """Pull items from a single modern-essay/article RSS feed."""
+    feed = feedparser.parse(url, agent=USER_AGENT)
     items: List[Dict[str, Any]] = []
-    for entry in feed.entries:
-        if len(items) >= target:
-            break
+    for entry in feed.entries[:max_items]:
         title = (entry.get("title") or "").strip()
         if not title:
             continue
-        creator = (entry.get("author") or "").strip() or fallback_creator
+        creator = (entry.get("author") or "").strip() or publication
         link = entry.get("link") or ""
         summary = _strip_html(entry.get("summary") or entry.get("description") or "")
-        description = summary[:500] or f"A {item_type} by {creator or 'unknown'}."
+        description = summary[:400] or f"An article by {creator}."
         items.append(
             {
                 "modality": "writing",
@@ -473,10 +478,11 @@ def _fetch_rss_items(
                 "year": _entry_year(entry),
                 "description": description,
                 "reviews": [],
+                "popularity_score": 0.6,
                 "cover_url": "",
                 "external_url": link,
                 "modality_specific": {
-                    "type": item_type,
+                    "type": "article",
                     "word_count": _word_count(summary),
                     "publication": publication,
                 },
@@ -485,114 +491,227 @@ def _fetch_rss_items(
     return items
 
 
-def _fetch_poetry_foundation(target: int) -> List[Dict[str, Any]]:
-    """Scrape Poetry Foundation's 'browse' listing sorted by popularity (lifetime views)."""
-    headers = {"User-Agent": USER_AGENT}
+def _fetch_rss_essays(target: int) -> List[Dict[str, Any]]:
+    """Path 1 — aggregate 7 modern-essay RSS feeds in parallel, dedup, cap at target."""
+    all_items: List[Dict[str, Any]] = []
+    with ThreadPoolExecutor(max_workers=len(WRITING_RSS_FEEDS)) as ex:
+        futures = {
+            ex.submit(_fetch_one_rss, pub, url): pub for pub, url in WRITING_RSS_FEEDS
+        }
+        for fut in as_completed(futures):
+            pub = futures[fut]
+            try:
+                items = fut.result()
+                print(f"  rss/{pub}: {len(items)} items", flush=True)
+                all_items.extend(items)
+            except Exception as exc:
+                print(f"  rss/{pub}: FAILED — {exc}", file=sys.stderr)
+
+    seen: Set[Tuple[str, str]] = set()
+    out: List[Dict[str, Any]] = []
+    for item in all_items:
+        key = (item["title"].strip().lower(), item["creator"].strip().lower())
+        if key in seen:
+            continue
+        seen.add(key)
+        out.append(item)
+    return out[:target]
+
+
+def _fetch_gutendex_essays(target: int) -> List[Dict[str, Any]]:
+    """Path 2 — classic essay collections from Project Gutenberg via Gutendex API."""
     items: List[Dict[str, Any]] = []
-    page = 1
-    while len(items) < target:
-        resp = http_get_with_retry(
-            POETRY_FOUNDATION_BROWSE,
-            params={"sort_by": "popular_views_lifetime", "page": page},
-            headers=headers,
-        )
+    next_url: Optional[str] = GUTENDEX_URL
+    params: Optional[Dict[str, Any]] = {"topic": "essays", "languages": "en"}
+    page_num = 0
+    while next_url and len(items) < target:
+        page_num += 1
+        # Gutendex's search endpoint is slow (~30s per page cold) — 60s timeout required.
+        resp = http_get_with_retry(next_url, params=params, timeout=60)
         if resp is None or resp.status_code != 200:
+            status = resp.status_code if resp is not None else "timeout/connection error"
+            print(
+                f"  gutendex: page {page_num} failed (status={status}); stopping after {len(items)} items",
+                file=sys.stderr,
+                flush=True,
+            )
             break
-        soup = BeautifulSoup(resp.text, "html.parser")
-        # Poem cards live in <article> elements on the browse page.
-        articles = soup.find_all("article")
-        if not articles:
+        try:
+            data = resp.json()
+        except ValueError:
             break
-        page_items = 0
-        for art in articles:
+        for book in data.get("results", []):
             if len(items) >= target:
                 break
-            title_link = art.find("a", href=lambda h: h and "/poems/" in h)
-            if not title_link:
+            title = (book.get("title") or "").strip()
+            if not title:
                 continue
-            title = title_link.get_text(strip=True)
-            href = title_link["href"]
-            if href.startswith("/"):
-                href = "https://www.poetryfoundation.org" + href
-            # Author often in a sibling link
-            author_link = art.find("a", href=lambda h: h and "/poets/" in h)
-            creator = author_link.get_text(strip=True) if author_link else ""
-            # Excerpt: longest text block in the article excluding the title
-            excerpt = ""
-            for p in art.find_all(["p", "div"]):
-                txt = p.get_text(" ", strip=True)
-                if txt and txt != title and len(txt) > len(excerpt):
-                    excerpt = txt
-            if not excerpt:
-                excerpt = f"A poem by {creator or 'unknown'}."
+            authors_list = book.get("authors") or []
+            author = (authors_list[0].get("name", "") if authors_list else "").strip()
+            subjects = book.get("subjects") or []
+            desc = f"Essays by {author or 'unknown'}."
+            if subjects:
+                desc = (desc + " Subjects: " + ", ".join(subjects[:3]))[:400]
+            formats = book.get("formats") or {}
+            cover_url = ""
+            for key in ("image/jpeg", "image/png"):
+                if key in formats:
+                    cover_url = formats[key]
+                    break
+            ext_url = ""
+            for key in ("text/html; charset=utf-8", "text/html"):
+                if key in formats:
+                    ext_url = formats[key]
+                    break
+            if not ext_url:
+                gid = book.get("id")
+                if gid:
+                    ext_url = f"https://www.gutenberg.org/ebooks/{gid}"
             items.append(
                 {
                     "modality": "writing",
                     "title": title,
-                    "creator": creator,
-                    "year": 0,
-                    "description": excerpt[:500],
+                    "creator": author,
+                    "year": 0,  # Gutendex does not expose publication year
+                    "description": desc,
                     "reviews": [],
-                    "cover_url": "",
-                    "external_url": href,
+                    "popularity_score": 0.7,
+                    "cover_url": cover_url,
+                    "external_url": ext_url,
                     "modality_specific": {
-                        "type": "poem",
-                        "word_count": _word_count(excerpt),
-                        "publication": "Poetry Foundation",
+                        "type": "essay",
+                        "word_count": 0,
+                        "publication": "Project Gutenberg",
                     },
                 }
             )
-            page_items += 1
-        if page_items == 0:
-            break
-        page += 1
-        time.sleep(1.0)
+        next_url = data.get("next")
+        params = None  # 'next' URLs already include the query params
+        time.sleep(0.5)
     return items
 
 
-def collect_writing(target_count: int = 1300) -> None:
-    """Build data/raw/writing/raw.jsonl from Longform + New Yorker Fiction + Poetry Foundation."""
+def _fetch_poetrydb_poems(target: int) -> List[Dict[str, Any]]:
+    """Path 3 — individual poems from PoetryDB (~129 classical poets)."""
+    resp = http_get_with_retry(f"{POETRYDB_BASE}/author")
+    if resp is None or resp.status_code != 200:
+        return []
+    try:
+        authors = resp.json().get("authors") or []
+    except ValueError:
+        return []
+    if not authors:
+        return []
+
+    # Spread picks across authors so output is not dominated by one prolific poet.
+    import random
+    rnd = random.Random(42)
+    rnd.shuffle(authors)
+
+    items: List[Dict[str, Any]] = []
+    for author in authors:
+        if len(items) >= target:
+            break
+        author_path = requests.utils.quote(author)
+        resp = http_get_with_retry(f"{POETRYDB_BASE}/author/{author_path}")
+        if resp is None or resp.status_code != 200:
+            continue
+        try:
+            poems = resp.json()
+        except ValueError:
+            continue
+        if not isinstance(poems, list):
+            continue
+        for poem in poems:
+            if len(items) >= target:
+                break
+            title = (poem.get("title") or "").strip()
+            if not title:
+                continue
+            poem_author = (poem.get("author") or author).strip()
+            lines = poem.get("lines") or []
+            body_text = "\n".join(lines)
+            description = body_text[:400].strip()
+            if not description:
+                continue
+            slug_title = requests.utils.quote(title)
+            slug_author = requests.utils.quote(poem_author)
+            items.append(
+                {
+                    "modality": "writing",
+                    "title": title,
+                    "creator": poem_author,
+                    "year": 0,
+                    "description": description,
+                    "reviews": [],
+                    "popularity_score": 0.5,
+                    "cover_url": "",
+                    "external_url": f"{POETRYDB_BASE}/title,author/{slug_title};{slug_author}",
+                    "modality_specific": {
+                        "type": "poem",
+                        "word_count": len(body_text.split()),
+                        "publication": "PoetryDB",
+                    },
+                }
+            )
+        time.sleep(0.2)
+    return items
+
+
+def collect_writing(target_count: int = 1250) -> None:
+    """Build data/raw/writing/raw.jsonl via 3 parallel paths: RSS / Gutendex / PoetryDB."""
     out_path = output_path("writing")
     existing_ids = load_existing_ids(out_path)
     print(f"writing: {len(existing_ids)} items already present in {out_path}")
 
-    # Spec target split: Longform 600 / Poetry 400 / NY Fiction 300
-    longform_target = (target_count * 600) // 1300
-    poetry_target = (target_count * 400) // 1300
-    nyf_target = target_count - longform_target - poetry_target
+    # Spec §5.1 targets: RSS ~150, Gutendex ~300, PoetryDB ~800.
+    rss_target = 150
+    gutendex_target = 300
+    poetrydb_target = max(0, target_count - rss_target - gutendex_target)
 
-    print(f"writing: fetching Longform RSS (target {longform_target})")
-    longform_items = _fetch_rss_items(
-        LONGFORM_RSS, longform_target, item_type="article", publication="Longform.org"
+    print(
+        f"writing: 3 paths in parallel — RSS ({rss_target}) / Gutendex ({gutendex_target}) / "
+        f"PoetryDB ({poetrydb_target})"
     )
-    print(f"  longform: {len(longform_items)} items")
-    time.sleep(1.0)
 
-    print(f"writing: fetching New Yorker Fiction RSS (target {nyf_target})")
-    nyf_items = _fetch_rss_items(
-        NEW_YORKER_FICTION_RSS,
-        nyf_target,
-        item_type="essay",
-        publication="The New Yorker",
-        fallback_creator="The New Yorker",
+    with ThreadPoolExecutor(max_workers=3) as ex:
+        f_rss = ex.submit(_fetch_rss_essays, rss_target)
+        f_gut = ex.submit(_fetch_gutendex_essays, gutendex_target)
+        f_pdb = ex.submit(_fetch_poetrydb_poems, poetrydb_target)
+        rss_items = f_rss.result()
+        gut_items = f_gut.result()
+        pdb_items = f_pdb.result()
+
+    print(
+        f"writing: fetched RSS {len(rss_items)} / Gutendex {len(gut_items)} / "
+        f"PoetryDB {len(pdb_items)}"
     )
-    print(f"  new yorker fiction: {len(nyf_items)} items")
-    time.sleep(1.0)
 
-    print(f"writing: scraping Poetry Foundation popular poems (target {poetry_target})")
-    poetry_items = _fetch_poetry_foundation(poetry_target)
-    print(f"  poetry foundation: {len(poetry_items)} items")
+    # Stable order (articles → essays → poems) so ID assignment is deterministic across reruns.
+    combined = rss_items + gut_items + pdb_items
+    seen: Set[Tuple[str, str]] = set()
+    deduped: List[Dict[str, Any]] = []
+    for item in combined:
+        title = item["title"].strip()
+        if not title:
+            continue
+        key = (title.lower(), (item.get("creator") or "").strip().lower())
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(item)
 
-    plan = longform_items + poetry_items + nyf_items
-    print(f"writing: total fetched = {len(plan)}")
+    print(
+        f"writing: {len(deduped)} items after dedup (removed {len(combined) - len(deduped)} duplicates)"
+    )
+    deduped = deduped[:target_count]
 
     written = 0
-    for offset, item in enumerate(plan, start=1):
-        item_id = f"writing_{offset:04d}"
+    for idx, item in enumerate(deduped, start=1):
+        item_id = f"writing_{idx:04d}"
         if item_id in existing_ids:
             continue
         item["id"] = item_id
-        item["popularity_score"] = 0.5  # spec: no objective metric, use uniform 0.5
         record = {
             "id": item["id"],
             "modality": "writing",
@@ -609,16 +728,320 @@ def collect_writing(target_count: int = 1300) -> None:
         append_jsonl(out_path, record)
         written += 1
 
-    print(f"writing: wrote {written} new items (skipped {len(plan) - written} already present)")
+    print(f"writing: wrote {written} new items (skipped {len(deduped) - written} already present)")
 
 
 # ---------------------------------------------------------------------------
-# Music — implemented later in Phase B
+# Music — Spotify track-search seeds + Last.fm tag/wiki enrichment
+#   NOTE: spec v1.2 §5.1 called for 8 editorial seed playlists, but Spotify's
+#   Nov 2024 API restrictions rendered those inaccessible (editorial playlists
+#   return null in search; user clones return 401 under client-credentials).
+#   Pivoted to genre+year track-search seeds. See collect_music() docstring
+#   for the Limitations-chapter writeup.
 # ---------------------------------------------------------------------------
 
+# (genre, year_range) tuples for Spotify track search. 15 seeds × 120 tracks
+# targets ~1800 candidates → dedup → 1500. The 3 extra seeds beyond the original
+# 12 (latin / soundtrack / world) cushion against genre-label noise seen during
+# probing (e.g. 'hip-hop' search returning Spanish-language pop).
+MUSIC_GENRE_SEEDS: List[Tuple[str, str]] = [
+    ("pop", "2015-2024"),
+    ("pop", "1980-1989"),
+    ("pop", "1970-1979"),
+    ("rock", "1970-1999"),
+    ("indie", "2010-2024"),
+    ("hip-hop", "2010-2024"),
+    ("r&b", "2000-2024"),
+    ("jazz", "1940-2024"),
+    ("classical", "1600-2024"),
+    ("ambient", "1990-2024"),
+    ("folk", "1960-2024"),
+    ("electronic", "2000-2024"),
+    ("latin", "2000-2024"),
+    ("soundtrack", "1980-2024"),
+    ("world", "1970-2024"),
+]
 
-def collect_music(target_count: int) -> None:
-    raise NotImplementedError("collect_music is implemented later in Phase B.")
+LASTFM_API_BASE = "https://ws.audioscrobbler.com/2.0/"
+
+
+def _get_spotify_client():
+    """Build a Spotipy client via client-credentials flow (no user auth required)."""
+    from spotipy import Spotify
+    from spotipy.oauth2 import SpotifyClientCredentials
+
+    client_id = os.environ.get("SPOTIFY_CLIENT_ID")
+    client_secret = os.environ.get("SPOTIFY_CLIENT_SECRET")
+    if not client_id or not client_secret:
+        print(
+            "ERROR: SPOTIFY_CLIENT_ID / SPOTIFY_CLIENT_SECRET not set in .env",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    auth = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
+    return Spotify(auth_manager=auth, retries=3, requests_timeout=20)
+
+
+def _spotify_search_tracks(
+    sp,
+    genre: str,
+    year_range: str,
+    target: int,
+    start_offset: int = 0,
+) -> Tuple[List[Dict[str, Any]], int]:
+    """Spotify track search with 'genre:<g> year:<r>' filter, paginated at 50/page.
+
+    Returns (tracks, next_offset). next_offset lets a caller resume this seed
+    deeper into results (used by collect_music's deep-fallback path when 15
+    seeds at default depth underfill after dedup).
+    """
+    # Spotify tightened search in 2024-25: max `limit` is now 10 (docs still say 50,
+    # but anything > 10 returns 400 "Invalid limit"), and `offset + limit` cannot
+    # exceed 1000 — so the deepest valid call is offset=990, limit=10.
+    LIMIT = 10
+    MAX_OFFSET = 1000 - LIMIT  # 990
+    q = f"genre:{genre} year:{year_range}"
+    tracks: List[Dict[str, Any]] = []
+    offset = start_offset
+    while len(tracks) < target and offset <= MAX_OFFSET:
+        try:
+            page = sp.search(q=q, type="track", limit=LIMIT, offset=offset)
+        except Exception as exc:
+            print(
+                f"  spotify/{genre} {year_range}: search failed at offset {offset} — {exc}",
+                file=sys.stderr,
+            )
+            break
+        items = (page.get("tracks") or {}).get("items") or []
+        if not items:
+            break
+        for tr in items:
+            if tr and tr.get("id"):
+                tracks.append(tr)
+                if len(tracks) >= target:
+                    break
+        offset += LIMIT
+    return tracks, offset
+
+
+def _lastfm_track_info(artist: str, track: str) -> Tuple[List[str], str]:
+    """Call Last.fm track.getInfo; returns (toptags, wiki_summary)."""
+    api_key = os.environ.get("LASTFM_API_KEY")
+    if not api_key or not artist or not track:
+        return [], ""
+    resp = http_get_with_retry(
+        LASTFM_API_BASE,
+        params={
+            "method": "track.getInfo",
+            "api_key": api_key,
+            "artist": artist,
+            "track": track,
+            "format": "json",
+            "autocorrect": 1,
+        },
+    )
+    if resp is None or resp.status_code != 200:
+        return [], ""
+    try:
+        data = resp.json()
+    except ValueError:
+        return [], ""
+    tr = data.get("track") or {}
+    tag_block = (tr.get("toptags") or {}).get("tag") or []
+    tags: List[str] = []
+    if isinstance(tag_block, list):
+        for t in tag_block:
+            name = (t.get("name") or "").strip() if isinstance(t, dict) else ""
+            if name:
+                tags.append(name)
+    wiki_summary = ""
+    wiki = tr.get("wiki")
+    if isinstance(wiki, dict):
+        wiki_summary = _strip_html(wiki.get("summary") or "")
+    return tags, wiki_summary
+
+
+def collect_music(target_count: int = 1500) -> None:
+    """Build data/raw/music/raw.jsonl from Spotify track-search seeds + Last.fm enrichment.
+
+    Spec deviation note (for Limitations chapter of report):
+    spec v1.2 §5.1 originally specified 8 editorial seed playlists (All Out 2010s,
+    Deep Focus, etc.) but those were blocked by Spotify's Nov 2024 API restrictions —
+    all editorial playlists return null in search, and user clones require OAuth
+    user auth (unavailable under client-credentials flow). Pivoted to direct track
+    search with genre+year filters; coverage is broadly equivalent but genre labels
+    are noisier (e.g. 'hip-hop' queries occasionally return Spanish-language pop).
+    Downstream Content Profile generation mitigates this by using Last.fm tags +
+    wiki rather than Spotify genre labels as the primary signal.
+
+    Known limitation (collection-time reality): During actual collection on
+    2026-04-19, the Spotify Web API client-credentials flow hit a rolling rate
+    limit window (~23.8 hour cooldown) after ~944 tracks were successfully
+    fetched. This is a documented post-Nov-2024 restriction on free-tier
+    developer apps. Rather than waiting 18+ hours to resume, we accepted the
+    partial collection. Music modality size: 944 (vs target 1500, 62.9%).
+    Total library: 3347 items (vs planned 4000, 83.7%). Modality balance is
+    actually improved by this (944 vs books/films 600 is less extreme than
+    1500 vs 600). Recorded in report Limitations section.
+    """
+    out_path = output_path("music")
+    existing_ids = load_existing_ids(out_path)
+    print(f"music: {len(existing_ids)} items already present in {out_path}")
+
+    sp = _get_spotify_client()
+
+    # 15 seeds × 120 tracks = 1800 candidates; dedup trims toward target_count.
+    per_seed = 120
+    seed_offsets: List[int] = [0] * len(MUSIC_GENRE_SEEDS)
+
+    pool: Dict[str, Dict[str, Any]] = {}
+    for i, (genre, year_range) in enumerate(MUSIC_GENRE_SEEDS, start=1):
+        tracks, next_offset = _spotify_search_tracks(
+            sp, genre, year_range, per_seed, start_offset=seed_offsets[i - 1]
+        )
+        seed_offsets[i - 1] = next_offset
+        added = 0
+        for tr in tracks:
+            tid = tr.get("id")
+            if tid and tid not in pool:
+                pool[tid] = tr
+                added += 1
+        print(
+            f"music: seed {i}/{len(MUSIC_GENRE_SEEDS)} complete "
+            f"({genre} {year_range}): +{added} unique (pool={len(pool)})",
+            flush=True,
+        )
+        time.sleep(0.3)
+
+    # Deep fallback: if dedup leaves us below target, go deeper on existing seeds
+    # rather than adding new noisy seeds. Rotate through all 15 until pool >= target
+    # or every seed has exhausted Spotify's offset=1000 cap.
+    while len(pool) < target_count:
+        made_progress = False
+        for i, (genre, year_range) in enumerate(MUSIC_GENRE_SEEDS, start=1):
+            if len(pool) >= target_count:
+                break
+            start = seed_offsets[i - 1]
+            if start >= 1000:
+                continue
+            tracks, next_offset = _spotify_search_tracks(
+                sp, genre, year_range, 60, start_offset=start
+            )
+            seed_offsets[i - 1] = next_offset
+            added = 0
+            for tr in tracks:
+                tid = tr.get("id")
+                if tid and tid not in pool:
+                    pool[tid] = tr
+                    added += 1
+            if added > 0:
+                made_progress = True
+                print(
+                    f"music: deep-fallback seed {i} ({genre} {year_range}) "
+                    f"from offset {start}: +{added} unique (pool={len(pool)})",
+                    flush=True,
+                )
+            time.sleep(0.3)
+        if not made_progress:
+            print(
+                f"music: all seeds exhausted; final pool size = {len(pool)} "
+                f"(target was {target_count})",
+                flush=True,
+            )
+            break
+
+    if not pool:
+        print("music: no tracks retrieved from Spotify — aborting.", file=sys.stderr)
+        return
+
+    # Deterministic order: Spotify popularity desc, then track id.
+    candidates = sorted(
+        pool.values(),
+        key=lambda t: (-(int(t.get("popularity") or 0)), t.get("id") or ""),
+    )[:target_count]
+
+    artist_genre_cache: Dict[str, str] = {}
+
+    def _artist_genres(artist_id: Optional[str]) -> str:
+        if not artist_id:
+            return ""
+        if artist_id in artist_genre_cache:
+            return artist_genre_cache[artist_id]
+        genres = ""
+        try:
+            payload = sp.artist(artist_id)
+            gl = payload.get("genres") or []
+            genres = ", ".join(gl)
+        except Exception:
+            pass
+        artist_genre_cache[artist_id] = genres
+        return genres
+
+    lastfm_sleep = 1.0 / 3.0  # ~3 req/sec (spec 7.3 conservative cap)
+    written = 0
+    skipped = 0
+
+    for idx, tr in enumerate(tqdm(candidates, desc="music"), start=1):
+        item_id = f"music_{idx:04d}"
+        if item_id in existing_ids:
+            skipped += 1
+            continue
+
+        artists = tr.get("artists") or []
+        primary_name = (artists[0].get("name") or "").strip() if artists else ""
+        creator = ", ".join(a.get("name", "") for a in artists[:2] if a.get("name"))
+        primary_artist_id = artists[0].get("id") if artists else None
+        title = (tr.get("name") or "").strip()
+        album_obj = tr.get("album") or {}
+        album = album_obj.get("name") or ""
+        images = album_obj.get("images") or []
+        cover_url = images[0].get("url", "") if images else ""
+        rel = (album_obj.get("release_date") or "").split("-")[0]
+        try:
+            year = int(rel) if rel else 0
+        except ValueError:
+            year = 0
+        spotify_pop = int(tr.get("popularity") or 0)
+        external_url = ((tr.get("external_urls") or {}).get("spotify")) or ""
+
+        genre = _artist_genres(primary_artist_id)
+
+        tags, wiki_summary = _lastfm_track_info(primary_name, title)
+        time.sleep(lastfm_sleep)
+
+        tag_review = ""
+        if tags:
+            tag_review = "Popular tags: " + ", ".join(tags[:6])
+        reviews: List[str] = [tag_review] if tag_review else []
+
+        record = {
+            "id": item_id,
+            "modality": "music",
+            "title": title,
+            "creator": creator,
+            "year": year,
+            "description": wiki_summary,
+            "reviews": reviews,
+            "popularity_score": spotify_pop / 100.0,
+            "cover_url": cover_url,
+            "external_url": external_url,
+            "modality_specific": {
+                "genre": genre,
+                "album": album,
+                "lastfm_tags": tags,
+                "spotify_popularity": spotify_pop,
+            },
+        }
+        append_jsonl(out_path, record)
+        written += 1
+
+        if (idx % 50) == 0:
+            print(
+                f"  progress: idx={idx}/{len(candidates)} written={written} skipped={skipped}",
+                flush=True,
+            )
+
+    print(f"music: done. wrote {written} new items, skipped {skipped} existing.")
 
 
 # ---------------------------------------------------------------------------
@@ -630,7 +1053,7 @@ SOURCE_DEFAULTS = {
     "books": 600,
     "films": 600,
     "music": 1500,
-    "writing": 1300,
+    "writing": 1250,
 }
 
 
