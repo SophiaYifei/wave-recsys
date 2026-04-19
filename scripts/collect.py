@@ -861,6 +861,26 @@ def _lastfm_track_info(artist: str, track: str) -> Tuple[List[str], str]:
     return tags, wiki_summary
 
 
+def _music_description_fallback(
+    wiki_summary: str, tags: List[str], creator: str, album: str
+) -> str:
+    """Pick the best available description for a track, tiered:
+    (1) Last.fm wiki summary; (2) synthesized line from top Last.fm tags;
+    (3) minimal line from creator + album; (4) minimal line from creator only.
+    Guarantees a non-empty string whenever any metadata is present.
+    """
+    if wiki_summary:
+        return wiki_summary
+    if tags:
+        top = tags[0]
+        return f"A {top} track. Listener tags: {', '.join(tags[:5])}."
+    if creator and album:
+        return f"A song by {creator} from the album {album}."
+    if creator:
+        return f"A song by {creator}."
+    return ""
+
+
 def collect_music(target_count: int = 1500) -> None:
     """Build data/raw/music/raw.jsonl from Spotify track-search seeds + Last.fm enrichment.
 
@@ -972,8 +992,12 @@ def collect_music(target_count: int = 1500) -> None:
             payload = sp.artist(artist_id)
             gl = payload.get("genres") or []
             genres = ", ".join(gl)
-        except Exception:
-            pass
+        except Exception as exc:
+            print(
+                f"  [WARN] sp.artist({artist_id}) failed: {exc}",
+                file=sys.stderr,
+                flush=True,
+            )
         artist_genre_cache[artist_id] = genres
         return genres
 
@@ -1020,7 +1044,7 @@ def collect_music(target_count: int = 1500) -> None:
             "title": title,
             "creator": creator,
             "year": year,
-            "description": wiki_summary,
+            "description": _music_description_fallback(wiki_summary, tags, creator, album),
             "reviews": reviews,
             "popularity_score": spotify_pop / 100.0,
             "cover_url": cover_url,
