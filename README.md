@@ -29,8 +29,8 @@ Cross-modal mood-aligned content recommendation. Describe a feeling, get a book,
    python scripts/collect.py --source=music --target-count=1500
    python scripts/collect.py --source=writing --target-count=1250
    python scripts/features.py --step=unify
-   python scripts/profile.py --step=profile
-   python scripts/profile.py --step=paraphrase
+   python scripts/generate_profiles.py --step=profile
+   python scripts/generate_profiles.py --step=paraphrase
    python scripts/features.py --step=build
    python scripts/train.py --model=knn
    python scripts/train.py --model=two_tower

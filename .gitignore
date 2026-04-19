@@ -217,7 +217,11 @@ data/processed/features.npz
 data/processed/profiles.jsonl
 data/processed/paraphrase_queries.jsonl
 data/processed/paraphrase_queries_featurized.npz
+data/processed/paraphrase_query_profiles.jsonl
 data/processed/catalog.jsonl
+data/processed/ab_sample_ids.txt
+data/processed/ab_profile_review.txt
+data/processed/*.log
 
 # Model binaries
 models/two_tower/*.pt
