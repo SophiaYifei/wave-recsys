@@ -1,0 +1,3089 @@
+[
+  {
+    "case_id": "case_00",
+    "query": "music for studying after a breakup",
+    "query_profile": {
+      "reasoning": "The user seeks an experience that balances the raw, inevitable weight of grief with the functional necessity of cognitive focus for study. The resulting profile prioritizes a melancholic yet serene atmosphere that acknowledges emotional pain without being so demanding or dissonant as to hinder concentration. It creates a container for processing loss through a lens of quiet, reflective solitude.",
+      "vibe_summary": "This is the sound of late-night study sessions where the hum of the desk lamp mirrors the steady, quiet rhythm of a heart healing in isolation. The experience is cool, sparse, and deeply introspective, offering a space where emotions are allowed to exist as background texture rather than immediate crises. It turns the ache of detachment into a calm, systematic process, making the silence of the room feel like a supportive companion.",
+      "mood_vector": [
+        0.2,
+        0.1,
+        0.4,
+        0.5,
+        0.1,
+        0.3,
+        0.4,
+        0.2,
+        0.3,
+        0.3,
+        0.6,
+        0.2
+      ],
+      "intent_vector": [
+        0.7,
+        0.3,
+        0.9,
+        0.2,
+        0.8,
+        0.3,
+        0.6
+      ],
+      "aesthetic_tags": [
+        "melancholic",
+        "minimalist",
+        "nocturnal",
+        "glass"
+      ]
+    },
+    "coherence_scores": {
+      "popularity": 0.07388339936733246,
+      "knn": 0.1473890319466591,
+      "two_tower": 0.20642976090312004
+    },
+    "modality_entropy": {
+      "popularity": 0.6128694524619496,
+      "knn": 0.0,
+      "two_tower": 0.0
+    },
+    "results_per_model": {
+      "popularity": [
+        {
+          "modality": "book",
+          "rank": 1,
+          "item_id": "book_0001",
+          "title": "The Hunger Games (The Hunger Games, #1)",
+          "creator": "Suzanne Collins"
+        },
+        {
+          "modality": "book",
+          "rank": 2,
+          "item_id": "book_0002",
+          "title": "Harry Potter and the Sorcerer's Stone (Harry Potter, #1)",
+          "creator": "J.K. Rowling, Mary GrandPr\u00e9"
+        },
+        {
+          "modality": "book",
+          "rank": 3,
+          "item_id": "book_0003",
+          "title": "Twilight (Twilight, #1)",
+          "creator": "Stephenie Meyer"
+        },
+        {
+          "modality": "film",
+          "rank": 1,
+          "item_id": "film_0583",
+          "title": "The Boys",
+          "creator": "Amazon Studios, Original Film"
+        },
+        {
+          "modality": "film",
+          "rank": 2,
+          "item_id": "film_0105",
+          "title": "Project Hail Mary",
+          "creator": "Lord Miller, Amazon MGM Studios"
+        },
+        {
+          "modality": "film",
+          "rank": 3,
+          "item_id": "film_0491",
+          "title": "The Rookie",
+          "creator": "ABC Studios, Entertainment One"
+        },
+        {
+          "modality": "music",
+          "rank": 1,
+          "item_id": "music_0474",
+          "title": "La Planta",
+          "creator": "Caos"
+        },
+        {
+          "modality": "music",
+          "rank": 2,
+          "item_id": "music_0473",
+          "title": "Low",
+          "creator": "SZA"
+        },
+        {
+          "modality": "music",
+          "rank": 3,
+          "item_id": "music_0475",
+          "title": "Say What",
+          "creator": "Rampa, Adam Port"
+        },
+        {
+          "modality": "writing",
+          "rank": 1,
+          "item_id": "writing_0404",
+          "title": "Political and Literary essays, 1908-1913",
+          "creator": "Cromer, Evelyn Baring, Earl of"
+        },
+        {
+          "modality": "writing",
+          "rank": 2,
+          "item_id": "writing_0203",
+          "title": "Essays \u2014 First Series",
+          "creator": "Emerson, Ralph Waldo"
+        },
+        {
+          "modality": "writing",
+          "rank": 3,
+          "item_id": "writing_0402",
+          "title": "English Critical Essays: Nineteenth Century",
+          "creator": ""
+        }
+      ],
+      "knn": [
+        {
+          "modality": "book",
+          "rank": 1,
+          "item_id": "book_0498",
+          "title": "2001: A Space Odyssey (Space Odyssey, #1)",
+          "creator": "Arthur C. Clarke"
+        },
+        {
+          "modality": "book",
+          "rank": 2,
+          "item_id": "book_0363",
+          "title": "Evermore (The Immortals, #1)",
+          "creator": "Alyson Noel"
+        },
+        {
+          "modality": "book",
+          "rank": 3,
+          "item_id": "book_0003",
+          "title": "Twilight (Twilight, #1)",
+          "creator": "Stephenie Meyer"
+        },
+        {
+          "modality": "film",
+          "rank": 1,
+          "item_id": "film_0077",
+          "title": "Given",
+          "creator": "Lerche, Aniplex"
+        },
+        {
+          "modality": "film",
+          "rank": 2,
+          "item_id": "film_0437",
+          "title": "Blue Planet II",
+          "creator": "BBC Studios Natural History Unit, BBC America"
+        },
+        {
+          "modality": "film",
+          "rank": 3,
+          "item_id": "film_0357",
+          "title": "La Notte",
+          "creator": "Nepi Film, Silver Films"
+        },
+        {
+          "modality": "music",
+          "rank": 1,
+          "item_id": "music_0834",
+          "title": "Too Good",
+          "creator": "Andrew Thomas"
+        },
+        {
+          "modality": "music",
+          "rank": 2,
+          "item_id": "music_0284",
+          "title": "Intro",
+          "creator": "Baby Blue"
+        },
+        {
+          "modality": "music",
+          "rank": 3,
+          "item_id": "music_0309",
+          "title": "Bad Sex",
+          "creator": "Lambert"
+        },
+        {
+          "modality": "writing",
+          "rank": 1,
+          "item_id": "writing_0947",
+          "title": "A Poem Sacred to the Memory of Sir Isaac Newton",
+          "creator": "James Thomson"
+        },
+        {
+          "modality": "writing",
+          "rank": 2,
+          "item_id": "writing_0760",
+          "title": "A happy lip -- breaks sudden",
+          "creator": "Emily Dickinson"
+        },
+        {
+          "modality": "writing",
+          "rank": 3,
+          "item_id": "writing_1113",
+          "title": "The Wind Is Without There And Howls In The Trees",
+          "creator": "Robert Louis Stevenson"
+        }
+      ],
+      "two_tower": [
+        {
+          "modality": "book",
+          "rank": 1,
+          "item_id": "book_0458",
+          "title": "Norwegian Wood",
+          "creator": "Haruki Murakami, Jay Rubin"
+        },
+        {
+          "modality": "book",
+          "rank": 2,
+          "item_id": "book_0274",
+          "title": "The Sun Also Rises",
+          "creator": "Ernest Hemingway"
+        },
+        {
+          "modality": "book",
+          "rank": 3,
+          "item_id": "book_0378",
+          "title": "Still Alice",
+          "creator": "Lisa Genova"
+        },
+        {
+          "modality": "film",
+          "rank": 1,
+          "item_id": "film_0357",
+          "title": "La Notte",
+          "creator": "Nepi Film, Silver Films"
+        },
+        {
+          "modality": "film",
+          "rank": 2,
+          "item_id": "film_0195",
+          "title": "In the Mood for Love",
+          "creator": "Block 2 Pictures, Paradis Films"
+        },
+        {
+          "modality": "film",
+          "rank": 3,
+          "item_id": "film_0184",
+          "title": "The Father",
+          "creator": "Les Films du Cru, Film4 Productions"
+        },
+        {
+          "modality": "music",
+          "rank": 1,
+          "item_id": "music_0088",
+          "title": "Hasta Aqu\u00ed Llegu\u00e9",
+          "creator": "Nanpa B\u00e1sico, Be\u00e9le"
+        },
+        {
+          "modality": "music",
+          "rank": 2,
+          "item_id": "music_0309",
+          "title": "Bad Sex",
+          "creator": "Lambert"
+        },
+        {
+          "modality": "music",
+          "rank": 3,
+          "item_id": "music_0753",
+          "title": "Well I Wonder - 2011 Remaster",
+          "creator": "The Smiths"
+        },
+        {
+          "modality": "writing",
+          "rank": 1,
+          "item_id": "writing_0670",
+          "title": "You see I cannot see -- your lifetime",
+          "creator": "Emily Dickinson"
+        },
+        {
+          "modality": "writing",
+          "rank": 2,
+          "item_id": "writing_0751",
+          "title": "A Door just opened on a street --",
+          "creator": "Emily Dickinson"
+        },
+        {
+          "modality": "writing",
+          "rank": 3,
+          "item_id": "writing_0862",
+          "title": "I hide myself within my flower,",
+          "creator": "Emily Dickinson"
+        }
+      ]
+    },
+    "category": "modality_collapse"
+  },
+  {
+    "case_id": "case_05",
+    "query": "remind me why life is worth it",
+    "query_profile": {
+      "reasoning": "This request seeks a perspective that anchors the user in the intrinsic value of existence amid life's difficulties. The desired tone is earnest, life-affirming, and introspective, aiming to bridge the gap between existential weight and the small, beautiful details that make life worth living. The aesthetic focuses on the clarity of the mundane, the warmth of human connection, and the sacredness of being alive.",
+      "vibe_summary": "I feel a gentle re-centering of my perspective, moving away from overwhelming existential questions toward the quiet, palpable magic of existing. It is an experience of being held, where the sharp edges of life soften into something luminous and undeniably precious. There is a sense of coming home to myself, uncovering a deep, quiet resolve that finds radiance in even the most ordinary, fleeting moments of the day.",
+      "mood_vector": [
+        0.8,
+        0.2,
+        0.1,
+        0.3,
+        0.6,
+        0.1,
+        0.2,
+        0.1,
+        0.3,
+        0.2,
+        0.1,
+        0.2
+      ],
+      "intent_vector": [
+        0.9,
+        0.3,
+        0.2,
+        0.8,
+        0.9,
+        0.7,
+        0.5
+      ],
+      "aesthetic_tags": [
+        "golden-hour",
+        "sacred",
+        "mundane",
+        "tender",
+        "pastoral"
+      ]
+    },
+    "coherence_scores": {
+      "popularity": 0.07388339936733246,
+      "knn": 0.16931933164596558,
+      "two_tower": 0.16676903267701468
+    },
+    "modality_entropy": {
+      "popularity": 0.6128694524619496,
+      "knn": 1.122372129066931,
+      "two_tower": 1.080527626604172
+    },
+    "results_per_model": {
+      "popularity": [
+        {
+          "modality": "book",
+          "rank": 1,
+          "item_id": "book_0001",
+          "title": "The Hunger Games (The Hunger Games, #1)",
+          "creator": "Suzanne Collins"
+        },
+        {
+          "modality": "book",
+          "rank": 2,
+          "item_id": "book_0002",
+          "title": "Harry Potter and the Sorcerer's Stone (Harry Potter, #1)",
+          "creator": "J.K. Rowling, Mary GrandPr\u00e9"
+        },
+        {
+          "modality": "book",
+          "rank": 3,
+          "item_id": "book_0003",
+          "title": "Twilight (Twilight, #1)",
+          "creator": "Stephenie Meyer"
+        },
+        {
+          "modality": "film",
+          "rank": 1,
+          "item_id": "film_0583",
+          "title": "The Boys",
+          "creator": "Amazon Studios, Original Film"
+        },
+        {
+          "modality": "film",
+          "rank": 2,
+          "item_id": "film_0105",
+          "title": "Project Hail Mary",
+          "creator": "Lord Miller, Amazon MGM Studios"
+        },
+        {
+          "modality": "film",
+          "rank": 3,
+          "item_id": "film_0491",
+          "title": "The Rookie",
+          "creator": "ABC Studios, Entertainment One"
+        },
+        {
+          "modality": "music",
+          "rank": 1,
+          "item_id": "music_0474",
+          "title": "La Planta",
+          "creator": "Caos"
+        },
+        {
+          "modality": "music",
+          "rank": 2,
+          "item_id": "music_0473",
+          "title": "Low",
+          "creator": "SZA"
+        },
+        {
+          "modality": "music",
+          "rank": 3,
+          "item_id": "music_0475",
+          "title": "Say What",
+          "creator": "Rampa, Adam Port"
+        },
+        {
+          "modality": "writing",
+          "rank": 1,
+          "item_id": "writing_0404",
+          "title": "Political and Literary essays, 1908-1913",
+          "creator": "Cromer, Evelyn Baring, Earl of"
+        },
+        {
+          "modality": "writing",
+          "rank": 2,
+          "item_id": "writing_0203",
+          "title": "Essays \u2014 First Series",
+          "creator": "Emerson, Ralph Waldo"
+        },
+        {
+          "modality": "writing",
+          "rank": 3,
+          "item_id": "writing_0402",
+          "title": "English Critical Essays: Nineteenth Century",
+          "creator": ""
+        }
+      ],
+      "knn": [
+        {
+          "modality": "book",
+          "rank": 1,
+          "item_id": "book_0037",
+          "title": "The Alchemist",
+          "creator": "Paulo Coelho, Alan R. Clarke"
+        },
+        {
+          "modality": "book",
+          "rank": 2,
+          "item_id": "book_0201",
+          "title": "The Chronicles of Narnia (Chronicles of Narnia, #1-7)",
+          "creator": "C.S. Lewis, Pauline Baynes"
+        },
+        {
+          "modality": "book",
+          "rank": 3,
+          "item_id": "book_0447",
+          "title": "The Horse and His Boy (Chronicles of Narnia, #5)",
+          "creator": "C.S. Lewis"
+        },
+        {
+          "modality": "film",
+          "rank": 1,
+          "item_id": "film_0414",
+          "title": "The Chosen",
+          "creator": "Loaves & Fishes Productions, Out of Order Studios"
+        },
+        {
+          "modality": "film",
+          "rank": 2,
+          "item_id": "film_0413",
+          "title": "When Life Gives You Tangerines",
+          "creator": "Pan Entertainment, Baram Pictures"
+        },
+        {
+          "modality": "film",
+          "rank": 3,
+          "item_id": "film_0219",
+          "title": "My Neighbor Totoro",
+          "creator": "Studio Ghibli, Nibariki"
+        },
+        {
+          "modality": "music",
+          "rank": 1,
+          "item_id": "music_0814",
+          "title": "Hasta la Ra\u00edz",
+          "creator": "Natalia Lafourcade"
+        },
+        {
+          "modality": "music",
+          "rank": 2,
+          "item_id": "music_0255",
+          "title": "Home",
+          "creator": "Phillip Phillips"
+        },
+        {
+          "modality": "music",
+          "rank": 3,
+          "item_id": "music_0121",
+          "title": "Peer Gynt Suite No. 1, Op. 46: I. Morning Mood",
+          "creator": "Edvard Grieg, Berliner Philharmoniker"
+        },
+        {
+          "modality": "writing",
+          "rank": 1,
+          "item_id": "writing_0920",
+          "title": "Nature -- the Gentlest Mother is,",
+          "creator": "Emily Dickinson"
+        },
+        {
+          "modality": "writing",
+          "rank": 2,
+          "item_id": "writing_0139",
+          "title": "Complete Prose Works: Specimen Days and Collect, November Boughs and Goodbye My Fancy",
+          "creator": "Whitman, Walt"
+        },
+        {
+          "modality": "writing",
+          "rank": 3,
+          "item_id": "writing_0592",
+          "title": "We should not mind so small a flower",
+          "creator": "Emily Dickinson"
+        }
+      ],
+      "two_tower": [
+        {
+          "modality": "book",
+          "rank": 1,
+          "item_id": "book_0037",
+          "title": "The Alchemist",
+          "creator": "Paulo Coelho, Alan R. Clarke"
+        },
+        {
+          "modality": "book",
+          "rank": 2,
+          "item_id": "book_0365",
+          "title": "Wonder",
+          "creator": "R.J. Palacio"
+        },
+        {
+          "modality": "book",
+          "rank": 3,
+          "item_id": "book_0277",
+          "title": "Three Cups of Tea: One Man's Mission to Promote Peace ... One School at a Time",
+          "creator": "Greg Mortenson, David Oliver Relin"
+        },
+        {
+          "modality": "film",
+          "rank": 1,
+          "item_id": "film_0093",
+          "title": "The Forge",
+          "creator": "Affirm Films, Kendrick Brothers"
+        },
+        {
+          "modality": "film",
+          "rank": 2,
+          "item_id": "film_0365",
+          "title": "Front of the Class",
+          "creator": "Hallmark Hall of Fame Productions, McGee Street Productions"
+        },
+        {
+          "modality": "film",
+          "rank": 3,
+          "item_id": "film_0147",
+          "title": "Piper",
+          "creator": "Pixar"
+        },
+        {
+          "modality": "music",
+          "rank": 1,
+          "item_id": "music_0344",
+          "title": "We'll Be Fine",
+          "creator": "Jorge Rivera-Herrans, Teagan Earley"
+        },
+        {
+          "modality": "music",
+          "rank": 2,
+          "item_id": "music_0886",
+          "title": "This Is Me",
+          "creator": "Keala Settle, The Greatest Showman Ensemble"
+        },
+        {
+          "modality": "music",
+          "rank": 3,
+          "item_id": "music_0151",
+          "title": "No One",
+          "creator": "Alicia Keys"
+        },
+        {
+          "modality": "writing",
+          "rank": 1,
+          "item_id": "writing_0139",
+          "title": "Complete Prose Works: Specimen Days and Collect, November Boughs and Goodbye My Fancy",
+          "creator": "Whitman, Walt"
+        },
+        {
+          "modality": "writing",
+          "rank": 2,
+          "item_id": "writing_0403",
+          "title": "Acres of Diamonds: Our Every-day Opportunities",
+          "creator": "Conwell, Russell H."
+        },
+        {
+          "modality": "writing",
+          "rank": 3,
+          "item_id": "writing_0338",
+          "title": "Tablets of Abdul-Baha Abbas",
+          "creator": "\u02bbAbdu'l-Bah\u00e1"
+        }
+      ]
+    },
+    "category": "high_cross_modal_coherence"
+  },
+  {
+    "case_id": "case_02",
+    "query": "I just need to feel something",
+    "query_profile": {
+      "reasoning": "The user is in a state of emotional vacancy, seeking to bridge the gap between numbness and feeling. The content is characterized by a high degree of sincerity, existential weight, and raw interiority to ensure a visceral reaction. The focus is on a grounded, melancholic experience that invites reflection, piercing through detachment.",
+      "vibe_summary": "I am looking for a heavy, soul-stirring resonance that cuts through numbness and anchors me back to my own humanity. I want to feel the weight of life and the sincerity of raw emotion, moving from the hollow space of detachment into the warmth of genuine, even if melancholic, presence. It is a slow, patient descent into the depths of feeling, where every beat of the heart is felt with absolute, unadorned honesty.",
+      "mood_vector": [
+        0.3,
+        0.4,
+        0.2,
+        0.3,
+        0.2,
+        0.3,
+        0.2,
+        0.1,
+        0.2,
+        0.2,
+        0.4,
+        0.3
+      ],
+      "intent_vector": [
+        0.7,
+        0.3,
+        0.1,
+        0.2,
+        0.9,
+        0.5,
+        0.2
+      ],
+      "aesthetic_tags": [
+        "melancholic",
+        "tender",
+        "paper",
+        "sacred",
+        "nocturnal"
+      ]
+    },
+    "coherence_scores": {
+      "popularity": 0.07388339936733246,
+      "knn": 0.14149855263531208,
+      "two_tower": 0.22250688324371973
+    },
+    "modality_entropy": {
+      "popularity": 0.6128694524619496,
+      "knn": 0.8260651866153444,
+      "two_tower": 0.6730116670092565
+    },
+    "results_per_model": {
+      "popularity": [
+        {
+          "modality": "book",
+          "rank": 1,
+          "item_id": "book_0001",
+          "title": "The Hunger Games (The Hunger Games, #1)",
+          "creator": "Suzanne Collins"
+        },
+        {
+          "modality": "book",
+          "rank": 2,
+          "item_id": "book_0002",
+          "title": "Harry Potter and the Sorcerer's Stone (Harry Potter, #1)",
+          "creator": "J.K. Rowling, Mary GrandPr\u00e9"
+        },
+        {
+          "modality": "book",
+          "rank": 3,
+          "item_id": "book_0003",
+          "title": "Twilight (Twilight, #1)",
+          "creator": "Stephenie Meyer"
+        },
+        {
+          "modality": "film",
+          "rank": 1,
+          "item_id": "film_0583",
+          "title": "The Boys",
+          "creator": "Amazon Studios, Original Film"
+        },
+        {
+          "modality": "film",
+          "rank": 2,
+          "item_id": "film_0105",
+          "title": "Project Hail Mary",
+          "creator": "Lord Miller, Amazon MGM Studios"
+        },
+        {
+          "modality": "film",
+          "rank": 3,
+          "item_id": "film_0491",
+          "title": "The Rookie",
+          "creator": "ABC Studios, Entertainment One"
+        },
+        {
+          "modality": "music",
+          "rank": 1,
+          "item_id": "music_0474",
+          "title": "La Planta",
+          "creator": "Caos"
+        },
+        {
+          "modality": "music",
+          "rank": 2,
+          "item_id": "music_0473",
+          "title": "Low",
+          "creator": "SZA"
+        },
+        {
+          "modality": "music",
+          "rank": 3,
+          "item_id": "music_0475",
+          "title": "Say What",
+          "creator": "Rampa, Adam Port"
+        },
+        {
+          "modality": "writing",
+          "rank": 1,
+          "item_id": "writing_0404",
+          "title": "Political and Literary essays, 1908-1913",
+          "creator": "Cromer, Evelyn Baring, Earl of"
+        },
+        {
+          "modality": "writing",
+          "rank": 2,
+          "item_id": "writing_0203",
+          "title": "Essays \u2014 First Series",
+          "creator": "Emerson, Ralph Waldo"
+        },
+        {
+          "modality": "writing",
+          "rank": 3,
+          "item_id": "writing_0402",
+          "title": "English Critical Essays: Nineteenth Century",
+          "creator": ""
+        }
+      ],
+      "knn": [
+        {
+          "modality": "book",
+          "rank": 1,
+          "item_id": "book_0187",
+          "title": "A Christmas Carol",
+          "creator": "Charles Dickens"
+        },
+        {
+          "modality": "book",
+          "rank": 2,
+          "item_id": "book_0488",
+          "title": "The Green Mile",
+          "creator": "Stephen King"
+        },
+        {
+          "modality": "book",
+          "rank": 3,
+          "item_id": "book_0026",
+          "title": "Romeo and Juliet",
+          "creator": "William Shakespeare, Robert           Jackson"
+        },
+        {
+          "modality": "film",
+          "rank": 1,
+          "item_id": "film_0543",
+          "title": "Violet Evergarden",
+          "creator": "Kyoto Animation, Pony Canyon"
+        },
+        {
+          "modality": "film",
+          "rank": 2,
+          "item_id": "film_0001",
+          "title": "The Shawshank Redemption",
+          "creator": "Castle Rock Entertainment"
+        },
+        {
+          "modality": "film",
+          "rank": 3,
+          "item_id": "film_0010",
+          "title": "The Green Mile",
+          "creator": "Castle Rock Entertainment, Darkwoods Productions"
+        },
+        {
+          "modality": "music",
+          "rank": 1,
+          "item_id": "music_0019",
+          "title": "Shrike",
+          "creator": "Hozier"
+        },
+        {
+          "modality": "music",
+          "rank": 2,
+          "item_id": "music_0660",
+          "title": "Losing My Religion",
+          "creator": "R.E.M."
+        },
+        {
+          "modality": "music",
+          "rank": 3,
+          "item_id": "music_0377",
+          "title": "History Has Its Eyes on You",
+          "creator": "Christopher Jackson, Lin-Manuel Miranda"
+        },
+        {
+          "modality": "writing",
+          "rank": 1,
+          "item_id": "writing_0978",
+          "title": "Success",
+          "creator": "Rupert Brooke"
+        },
+        {
+          "modality": "writing",
+          "rank": 2,
+          "item_id": "writing_0528",
+          "title": "Come Sleep, O Sleep! The Certain Knot Of Peace",
+          "creator": "Sir Philip Sidney"
+        },
+        {
+          "modality": "writing",
+          "rank": 3,
+          "item_id": "writing_0955",
+          "title": "Sir Galahad, a Christmas Mystery",
+          "creator": "William Morris"
+        }
+      ],
+      "two_tower": [
+        {
+          "modality": "book",
+          "rank": 1,
+          "item_id": "book_0096",
+          "title": "Me Before You (Me Before You, #1)",
+          "creator": "Jojo Moyes"
+        },
+        {
+          "modality": "book",
+          "rank": 2,
+          "item_id": "book_0307",
+          "title": "She's Come Undone",
+          "creator": "Wally Lamb"
+        },
+        {
+          "modality": "book",
+          "rank": 3,
+          "item_id": "book_0433",
+          "title": "Where She Went (If I Stay, #2)",
+          "creator": "Gayle Forman"
+        },
+        {
+          "modality": "film",
+          "rank": 1,
+          "item_id": "film_0090",
+          "title": "Clouds",
+          "creator": "Mad Chance, La Scala Films"
+        },
+        {
+          "modality": "film",
+          "rank": 2,
+          "item_id": "film_0036",
+          "title": "A Silent Voice: The Movie",
+          "creator": "Kyoto Animation, ABC Animation"
+        },
+        {
+          "modality": "film",
+          "rank": 3,
+          "item_id": "film_0094",
+          "title": "Life in a Year",
+          "creator": "Columbia Pictures, Overbrook Entertainment"
+        },
+        {
+          "modality": "music",
+          "rank": 1,
+          "item_id": "music_0673",
+          "title": "EL AMOR DE SU VIDA",
+          "creator": "Grupo Frontera, Grupo Firme"
+        },
+        {
+          "modality": "music",
+          "rank": 2,
+          "item_id": "music_0899",
+          "title": "Burn",
+          "creator": "Phillipa Soo"
+        },
+        {
+          "modality": "music",
+          "rank": 3,
+          "item_id": "music_0370",
+          "title": "Tu Carcel - En Vivo",
+          "creator": "Los Enanitos Verdes"
+        },
+        {
+          "modality": "writing",
+          "rank": 1,
+          "item_id": "writing_0012",
+          "title": "Mirta Ojito on \u201cDeeper than the Ocean\u201d",
+          "creator": "Megan Cummins"
+        },
+        {
+          "modality": "writing",
+          "rank": 2,
+          "item_id": "writing_0308",
+          "title": "American Indian Stories",
+          "creator": "Zitkala-Sa"
+        },
+        {
+          "modality": "writing",
+          "rank": 3,
+          "item_id": "writing_0216",
+          "title": "Letters of Samuel Rutherford: (Third Edition)",
+          "creator": "Rutherford, Samuel"
+        }
+      ]
+    },
+    "category": "knn_two_tower_disagreement"
+  },
+  {
+    "case_id": "case_17",
+    "query": "the aesthetic of a late-night convenience store",
+    "query_profile": {
+      "reasoning": "A late-night convenience store is a liminal space that feels detached from the ticking clock of the outside world, blending synthetic artificiality with a quiet sense of physical presence. The experience is defined by loneliness, cool fluorescent lighting against the dark, and an urban stillness that feels meditative rather than active. It offers a sense of solitary introspection within a bright, enclosed, yet anonymous environment.",
+      "vibe_summary": "I am standing by the glass window watching rain hit the asphalt, the hum of the reach-in refrigerator the only sound breaking the silence. Everything is fluorescent-bright, clinical, and slightly surreal, yet there is a strange, grounding comfort in this suspended reality. It feels like 3 AM\u2014a place where time has stopped, the world is asleep, and I am momentarily untethered from the demands of the day.",
+      "mood_vector": [
+        0.4,
+        0.2,
+        0.7,
+        0.6,
+        0.1,
+        0.3,
+        0.2,
+        0.8,
+        0.6,
+        0.7,
+        0.3,
+        0.2
+      ],
+      "intent_vector": [
+        0.3,
+        0.7,
+        0.4,
+        0.1,
+        0.8,
+        0.2,
+        0.6
+      ],
+      "aesthetic_tags": [
+        "liminal",
+        "nocturnal",
+        "neon",
+        "glass",
+        "mundane"
+      ]
+    },
+    "coherence_scores": {
+      "popularity": 0.07388339936733246,
+      "knn": 0.14990528921286264,
+      "two_tower": 0.10784333261350791
+    },
+    "modality_entropy": {
+      "popularity": 0.6128694524619496,
+      "knn": 0.6128694524619495,
+      "two_tower": 0.3250829733914482
+    },
+    "results_per_model": {
+      "popularity": [
+        {
+          "modality": "book",
+          "rank": 1,
+          "item_id": "book_0001",
+          "title": "The Hunger Games (The Hunger Games, #1)",
+          "creator": "Suzanne Collins"
+        },
+        {
+          "modality": "book",
+          "rank": 2,
+          "item_id": "book_0002",
+          "title": "Harry Potter and the Sorcerer's Stone (Harry Potter, #1)",
+          "creator": "J.K. Rowling, Mary GrandPr\u00e9"
+        },
+        {
+          "modality": "book",
+          "rank": 3,
+          "item_id": "book_0003",
+          "title": "Twilight (Twilight, #1)",
+          "creator": "Stephenie Meyer"
+        },
+        {
+          "modality": "film",
+          "rank": 1,
+          "item_id": "film_0583",
+          "title": "The Boys",
+          "creator": "Amazon Studios, Original Film"
+        },
+        {
+          "modality": "film",
+          "rank": 2,
+          "item_id": "film_0105",
+          "title": "Project Hail Mary",
+          "creator": "Lord Miller, Amazon MGM Studios"
+        },
+        {
+          "modality": "film",
+          "rank": 3,
+          "item_id": "film_0491",
+          "title": "The Rookie",
+          "creator": "ABC Studios, Entertainment One"
+        },
+        {
+          "modality": "music",
+          "rank": 1,
+          "item_id": "music_0474",
+          "title": "La Planta",
+          "creator": "Caos"
+        },
+        {
+          "modality": "music",
+          "rank": 2,
+          "item_id": "music_0473",
+          "title": "Low",
+          "creator": "SZA"
+        },
+        {
+          "modality": "music",
+          "rank": 3,
+          "item_id": "music_0475",
+          "title": "Say What",
+          "creator": "Rampa, Adam Port"
+        },
+        {
+          "modality": "writing",
+          "rank": 1,
+          "item_id": "writing_0404",
+          "title": "Political and Literary essays, 1908-1913",
+          "creator": "Cromer, Evelyn Baring, Earl of"
+        },
+        {
+          "modality": "writing",
+          "rank": 2,
+          "item_id": "writing_0203",
+          "title": "Essays \u2014 First Series",
+          "creator": "Emerson, Ralph Waldo"
+        },
+        {
+          "modality": "writing",
+          "rank": 3,
+          "item_id": "writing_0402",
+          "title": "English Critical Essays: Nineteenth Century",
+          "creator": ""
+        }
+      ],
+      "knn": [
+        {
+          "modality": "book",
+          "rank": 1,
+          "item_id": "book_0375",
+          "title": "Do Androids Dream of Electric Sheep?",
+          "creator": "Philip K. Dick, Roger Zelazny"
+        },
+        {
+          "modality": "book",
+          "rank": 2,
+          "item_id": "book_0198",
+          "title": "American Gods (American Gods, #1)",
+          "creator": "Neil Gaiman"
+        },
+        {
+          "modality": "book",
+          "rank": 3,
+          "item_id": "book_0459",
+          "title": "Neuromancer",
+          "creator": "William Gibson"
+        },
+        {
+          "modality": "film",
+          "rank": 1,
+          "item_id": "film_0372",
+          "title": "Heat",
+          "creator": "Warner Bros. Pictures, Regency Enterprises"
+        },
+        {
+          "modality": "film",
+          "rank": 2,
+          "item_id": "film_0358",
+          "title": "Blade Runner",
+          "creator": "Shaw Brothers, The Ladd Company"
+        },
+        {
+          "modality": "film",
+          "rank": 3,
+          "item_id": "film_0483",
+          "title": "Shadow Hunter",
+          "creator": "Sorcery Films, Ocean Entertainment"
+        },
+        {
+          "modality": "music",
+          "rank": 1,
+          "item_id": "music_0177",
+          "title": "Goth",
+          "creator": "Sidewalks and Skeletons"
+        },
+        {
+          "modality": "music",
+          "rank": 2,
+          "item_id": "music_0607",
+          "title": "City Lights",
+          "creator": "Aastik Koshy, Bernard Margarit"
+        },
+        {
+          "modality": "music",
+          "rank": 3,
+          "item_id": "music_0464",
+          "title": "West End Girls - 2018 Remaster",
+          "creator": "Pet Shop Boys"
+        },
+        {
+          "modality": "writing",
+          "rank": 1,
+          "item_id": "writing_0070",
+          "title": "The Romance of the Gas-Station Sign",
+          "creator": "Ian Bogost"
+        },
+        {
+          "modality": "writing",
+          "rank": 2,
+          "item_id": "writing_0005",
+          "title": "A Month or So, Minneapolis",
+          "creator": "Jake Lancaster"
+        },
+        {
+          "modality": "writing",
+          "rank": 3,
+          "item_id": "writing_0280",
+          "title": "Nights in London",
+          "creator": "Burke, Thomas"
+        }
+      ],
+      "two_tower": [
+        {
+          "modality": "book",
+          "rank": 1,
+          "item_id": "book_0257",
+          "title": "The Cuckoo's Calling (Cormoran Strike, #1)",
+          "creator": "Robert Galbraith, J.K. Rowling"
+        },
+        {
+          "modality": "book",
+          "rank": 2,
+          "item_id": "book_0319",
+          "title": "Diary of a Wimpy Kid (Diary of a Wimpy Kid, #1)",
+          "creator": "Jeff Kinney"
+        },
+        {
+          "modality": "book",
+          "rank": 3,
+          "item_id": "book_0152",
+          "title": "Emma",
+          "creator": "Jane Austen, Fiona Stafford"
+        },
+        {
+          "modality": "film",
+          "rank": 1,
+          "item_id": "film_0542",
+          "title": "The Kardashians",
+          "creator": "Kardashian Jenner Productions, Fulwell 73 Productions"
+        },
+        {
+          "modality": "film",
+          "rank": 2,
+          "item_id": "film_0128",
+          "title": "The Apartment",
+          "creator": "The Mirisch Company"
+        },
+        {
+          "modality": "film",
+          "rank": 3,
+          "item_id": "film_0331",
+          "title": "Chungking Express",
+          "creator": "Jet Tone Production"
+        },
+        {
+          "modality": "music",
+          "rank": 1,
+          "item_id": "music_0342",
+          "title": "Girl With The Tattoo Enter.lewd",
+          "creator": "Miguel"
+        },
+        {
+          "modality": "music",
+          "rank": 2,
+          "item_id": "music_0161",
+          "title": "Trust",
+          "creator": "Brent Faiyaz"
+        },
+        {
+          "modality": "music",
+          "rank": 3,
+          "item_id": "music_0189",
+          "title": "Deacon Blues",
+          "creator": "Steely Dan"
+        },
+        {
+          "modality": "writing",
+          "rank": 1,
+          "item_id": "writing_0070",
+          "title": "The Romance of the Gas-Station Sign",
+          "creator": "Ian Bogost"
+        },
+        {
+          "modality": "writing",
+          "rank": 2,
+          "item_id": "writing_0747",
+          "title": "The Flower must not blame the Bee",
+          "creator": "Emily Dickinson"
+        },
+        {
+          "modality": "writing",
+          "rank": 3,
+          "item_id": "writing_0101",
+          "title": "Things on Places",
+          "creator": "Aea Varfis-van Warmelo"
+        }
+      ]
+    },
+    "category": "partial_disagreement"
+  },
+  {
+    "case_id": "case_01",
+    "query": "something to watch at 3am when I can't sleep",
+    "query_profile": {
+      "reasoning": "The user is looking for a piece of media that acts as a bridge between wakefulness and sleep, characterized by a quiet, ambient atmosphere that does not demand active engagement. The mood should be introspective and calm, dwelling in the liminal space of the late night hours where the outside world feels distant and muted. The focus is on stillness and sensory containment.",
+      "vibe_summary": "I feel like I am floating through the quiet, hollowed-out hours of the night. There is a sense of calm detachment from the daytime world, where time feels suspended and the edges of my surroundings soften into shadows. Consuming this feels like sitting by a window watching a deserted street; it is gentle, solitary, and deeply meditative, providing a soft background pulse to the silence of 3am stillness.",
+      "mood_vector": [
+        0.4,
+        0.1,
+        0.3,
+        0.5,
+        0.2,
+        0.2,
+        0.3,
+        0.2,
+        0.6,
+        0.5,
+        0.5,
+        0.2
+      ],
+      "intent_vector": [
+        0.7,
+        0.6,
+        0.8,
+        0.1,
+        0.6,
+        0.2,
+        0.9
+      ],
+      "aesthetic_tags": [
+        "liminal",
+        "nocturnal",
+        "moonlit",
+        "minimalist",
+        "mundane"
+      ]
+    },
+    "coherence_scores": {
+      "popularity": 0.07388339936733246,
+      "knn": 0.21781881898641586,
+      "two_tower": 0.17211301873127619
+    },
+    "modality_entropy": {
+      "popularity": 0.6128694524619496,
+      "knn": 0.42270908780599087,
+      "two_tower": 0.0
+    },
+    "results_per_model": {
+      "popularity": [
+        {
+          "modality": "book",
+          "rank": 1,
+          "item_id": "book_0001",
+          "title": "The Hunger Games (The Hunger Games, #1)",
+          "creator": "Suzanne Collins"
+        },
+        {
+          "modality": "book",
+          "rank": 2,
+          "item_id": "book_0002",
+          "title": "Harry Potter and the Sorcerer's Stone (Harry Potter, #1)",
+          "creator": "J.K. Rowling, Mary GrandPr\u00e9"
+        },
+        {
+          "modality": "book",
+          "rank": 3,
+          "item_id": "book_0003",
+          "title": "Twilight (Twilight, #1)",
+          "creator": "Stephenie Meyer"
+        },
+        {
+          "modality": "film",
+          "rank": 1,
+          "item_id": "film_0583",
+          "title": "The Boys",
+          "creator": "Amazon Studios, Original Film"
+        },
+        {
+          "modality": "film",
+          "rank": 2,
+          "item_id": "film_0105",
+          "title": "Project Hail Mary",
+          "creator": "Lord Miller, Amazon MGM Studios"
+        },
+        {
+          "modality": "film",
+          "rank": 3,
+          "item_id": "film_0491",
+          "title": "The Rookie",
+          "creator": "ABC Studios, Entertainment One"
+        },
+        {
+          "modality": "music",
+          "rank": 1,
+          "item_id": "music_0474",
+          "title": "La Planta",
+          "creator": "Caos"
+        },
+        {
+          "modality": "music",
+          "rank": 2,
+          "item_id": "music_0473",
+          "title": "Low",
+          "creator": "SZA"
+        },
+        {
+          "modality": "music",
+          "rank": 3,
+          "item_id": "music_0475",
+          "title": "Say What",
+          "creator": "Rampa, Adam Port"
+        },
+        {
+          "modality": "writing",
+          "rank": 1,
+          "item_id": "writing_0404",
+          "title": "Political and Literary essays, 1908-1913",
+          "creator": "Cromer, Evelyn Baring, Earl of"
+        },
+        {
+          "modality": "writing",
+          "rank": 2,
+          "item_id": "writing_0203",
+          "title": "Essays \u2014 First Series",
+          "creator": "Emerson, Ralph Waldo"
+        },
+        {
+          "modality": "writing",
+          "rank": 3,
+          "item_id": "writing_0402",
+          "title": "English Critical Essays: Nineteenth Century",
+          "creator": ""
+        }
+      ],
+      "knn": [
+        {
+          "modality": "book",
+          "rank": 1,
+          "item_id": "book_0338",
+          "title": "Goodnight Moon",
+          "creator": "Margaret Wise Brown, Clement Hurd"
+        },
+        {
+          "modality": "book",
+          "rank": 2,
+          "item_id": "book_0540",
+          "title": "Corduroy",
+          "creator": "Don Freeman"
+        },
+        {
+          "modality": "book",
+          "rank": 3,
+          "item_id": "book_0298",
+          "title": "Neverwhere",
+          "creator": "Neil Gaiman"
+        },
+        {
+          "modality": "film",
+          "rank": 1,
+          "item_id": "film_0483",
+          "title": "Shadow Hunter",
+          "creator": "Sorcery Films, Ocean Entertainment"
+        },
+        {
+          "modality": "film",
+          "rank": 2,
+          "item_id": "film_0083",
+          "title": "A Brighter Summer Day",
+          "creator": "Yang & His Gang Filmmakers, Brighter Summer Productions"
+        },
+        {
+          "modality": "film",
+          "rank": 3,
+          "item_id": "film_0437",
+          "title": "Blue Planet II",
+          "creator": "BBC Studios Natural History Unit, BBC America"
+        },
+        {
+          "modality": "music",
+          "rank": 1,
+          "item_id": "music_0592",
+          "title": "Oh My",
+          "creator": "GRGY"
+        },
+        {
+          "modality": "music",
+          "rank": 2,
+          "item_id": "music_0854",
+          "title": "Lifelong Trip",
+          "creator": "Chronos"
+        },
+        {
+          "modality": "music",
+          "rank": 3,
+          "item_id": "music_0360",
+          "title": "Fake Recording (for 17)",
+          "creator": "sevenism"
+        },
+        {
+          "modality": "writing",
+          "rank": 1,
+          "item_id": "writing_1076",
+          "title": "The Star",
+          "creator": "Ann Taylor"
+        },
+        {
+          "modality": "writing",
+          "rank": 2,
+          "item_id": "writing_0280",
+          "title": "Nights in London",
+          "creator": "Burke, Thomas"
+        },
+        {
+          "modality": "writing",
+          "rank": 3,
+          "item_id": "writing_0796",
+          "title": "Like Men and Women Shadows walk",
+          "creator": "Emily Dickinson"
+        }
+      ],
+      "two_tower": [
+        {
+          "modality": "book",
+          "rank": 1,
+          "item_id": "book_0338",
+          "title": "Goodnight Moon",
+          "creator": "Margaret Wise Brown, Clement Hurd"
+        },
+        {
+          "modality": "book",
+          "rank": 2,
+          "item_id": "book_0512",
+          "title": "The Polar Express",
+          "creator": "Chris Van Allsburg"
+        },
+        {
+          "modality": "book",
+          "rank": 3,
+          "item_id": "book_0267",
+          "title": "Twilight: The Complete Illustrated Movie Companion",
+          "creator": "Mark Cotta Vaz"
+        },
+        {
+          "modality": "film",
+          "rank": 1,
+          "item_id": "film_0331",
+          "title": "Chungking Express",
+          "creator": "Jet Tone Production"
+        },
+        {
+          "modality": "film",
+          "rank": 2,
+          "item_id": "film_0469",
+          "title": "Batman: The Animated Series",
+          "creator": "DC, Warner Bros. Television"
+        },
+        {
+          "modality": "film",
+          "rank": 3,
+          "item_id": "film_0200",
+          "title": "Das Boot",
+          "creator": "Radiant Film, Bavaria Film"
+        },
+        {
+          "modality": "music",
+          "rank": 1,
+          "item_id": "music_0511",
+          "title": "Better",
+          "creator": "Khalid"
+        },
+        {
+          "modality": "music",
+          "rank": 2,
+          "item_id": "music_0595",
+          "title": "Dreams",
+          "creator": "Razor Man, Wendy Cy"
+        },
+        {
+          "modality": "music",
+          "rank": 3,
+          "item_id": "music_0335",
+          "title": "Hypnotized",
+          "creator": "Fleetwood Mac"
+        },
+        {
+          "modality": "writing",
+          "rank": 1,
+          "item_id": "writing_1134",
+          "title": "The Moon",
+          "creator": "Robert Louis Stevenson"
+        },
+        {
+          "modality": "writing",
+          "rank": 2,
+          "item_id": "writing_0483",
+          "title": "A Night-Rain in Summer",
+          "creator": "James Henry Leigh Hunt"
+        },
+        {
+          "modality": "writing",
+          "rank": 3,
+          "item_id": "writing_0786",
+          "title": "The Moon was but a Chin of Gold",
+          "creator": "Emily Dickinson"
+        }
+      ]
+    },
+    "category": "modality_collapse"
+  },
+  {
+    "case_id": "case_07",
+    "query": "something quiet and slow, like rain on glass",
+    "query_profile": {
+      "reasoning": "This request captures a state of gentle, solitary introspection characterized by a low-stakes, sensory-rich environment. It emphasizes the beauty of the mundane and the feeling of protective enclosure from the outside world. The aesthetic leans into the quiet, fluid intersection of domesticity and natural rhythms.",
+      "vibe_summary": "I want to feel the world narrowing down to the soft, rhythmic drumming of rain against a windowpane. It is a slow, quiet experience that wraps around me like a weighted blanket, grounding me in the present moment. This is a space of stillness where time feels suspended, letting me breathe and simply exist in the cool, fluid tranquility of a rainy, undistracted afternoon.",
+      "mood_vector": [
+        0.5,
+        0.1,
+        0.2,
+        0.4,
+        0.1,
+        0.1,
+        0.3,
+        0.1,
+        0.8,
+        0.2,
+        0.4,
+        0.1
+      ],
+      "intent_vector": [
+        0.9,
+        0.6,
+        0.7,
+        0.1,
+        0.8,
+        0.3,
+        0.8
+      ],
+      "aesthetic_tags": [
+        "glass",
+        "water",
+        "mundane",
+        "tender",
+        "minimalist"
+      ]
+    },
+    "coherence_scores": {
+      "popularity": 0.07388339936733246,
+      "knn": 0.2102928633491198,
+      "two_tower": 0.17748676550885042
+    },
+    "modality_entropy": {
+      "popularity": 0.6128694524619496,
+      "knn": 0.39439769144744274,
+      "two_tower": 0.3250829733914482
+    },
+    "results_per_model": {
+      "popularity": [
+        {
+          "modality": "book",
+          "rank": 1,
+          "item_id": "book_0001",
+          "title": "The Hunger Games (The Hunger Games, #1)",
+          "creator": "Suzanne Collins"
+        },
+        {
+          "modality": "book",
+          "rank": 2,
+          "item_id": "book_0002",
+          "title": "Harry Potter and the Sorcerer's Stone (Harry Potter, #1)",
+          "creator": "J.K. Rowling, Mary GrandPr\u00e9"
+        },
+        {
+          "modality": "book",
+          "rank": 3,
+          "item_id": "book_0003",
+          "title": "Twilight (Twilight, #1)",
+          "creator": "Stephenie Meyer"
+        },
+        {
+          "modality": "film",
+          "rank": 1,
+          "item_id": "film_0583",
+          "title": "The Boys",
+          "creator": "Amazon Studios, Original Film"
+        },
+        {
+          "modality": "film",
+          "rank": 2,
+          "item_id": "film_0105",
+          "title": "Project Hail Mary",
+          "creator": "Lord Miller, Amazon MGM Studios"
+        },
+        {
+          "modality": "film",
+          "rank": 3,
+          "item_id": "film_0491",
+          "title": "The Rookie",
+          "creator": "ABC Studios, Entertainment One"
+        },
+        {
+          "modality": "music",
+          "rank": 1,
+          "item_id": "music_0474",
+          "title": "La Planta",
+          "creator": "Caos"
+        },
+        {
+          "modality": "music",
+          "rank": 2,
+          "item_id": "music_0473",
+          "title": "Low",
+          "creator": "SZA"
+        },
+        {
+          "modality": "music",
+          "rank": 3,
+          "item_id": "music_0475",
+          "title": "Say What",
+          "creator": "Rampa, Adam Port"
+        },
+        {
+          "modality": "writing",
+          "rank": 1,
+          "item_id": "writing_0404",
+          "title": "Political and Literary essays, 1908-1913",
+          "creator": "Cromer, Evelyn Baring, Earl of"
+        },
+        {
+          "modality": "writing",
+          "rank": 2,
+          "item_id": "writing_0203",
+          "title": "Essays \u2014 First Series",
+          "creator": "Emerson, Ralph Waldo"
+        },
+        {
+          "modality": "writing",
+          "rank": 3,
+          "item_id": "writing_0402",
+          "title": "English Critical Essays: Nineteenth Century",
+          "creator": ""
+        }
+      ],
+      "knn": [
+        {
+          "modality": "book",
+          "rank": 1,
+          "item_id": "book_0453",
+          "title": "Message in a Bottle",
+          "creator": "Nicholas Sparks"
+        },
+        {
+          "modality": "book",
+          "rank": 2,
+          "item_id": "book_0203",
+          "title": "Siddhartha",
+          "creator": "Hermann Hesse, Hilda Rosner"
+        },
+        {
+          "modality": "book",
+          "rank": 3,
+          "item_id": "book_0283",
+          "title": "Under the Tuscan Sun",
+          "creator": "Frances Mayes"
+        },
+        {
+          "modality": "film",
+          "rank": 1,
+          "item_id": "film_0558",
+          "title": "My Holo Love",
+          "creator": "Studio Dragon"
+        },
+        {
+          "modality": "film",
+          "rank": 2,
+          "item_id": "film_0147",
+          "title": "Piper",
+          "creator": "Pixar"
+        },
+        {
+          "modality": "film",
+          "rank": 3,
+          "item_id": "film_0398",
+          "title": "Castaway on the Moon",
+          "creator": "Cinema Service, CJ Entertainment"
+        },
+        {
+          "modality": "music",
+          "rank": 1,
+          "item_id": "music_0730",
+          "title": "Peace flow",
+          "creator": "Jon Albreit"
+        },
+        {
+          "modality": "music",
+          "rank": 2,
+          "item_id": "music_0671",
+          "title": "Sparks - Instrumental",
+          "creator": "Evan Jacobson"
+        },
+        {
+          "modality": "music",
+          "rank": 3,
+          "item_id": "music_0086",
+          "title": "Stormy Nights",
+          "creator": "Stillness Sanctuary"
+        },
+        {
+          "modality": "writing",
+          "rank": 1,
+          "item_id": "writing_0752",
+          "title": "A Drop Fell on the Apple Tree --",
+          "creator": "Emily Dickinson"
+        },
+        {
+          "modality": "writing",
+          "rank": 2,
+          "item_id": "writing_0483",
+          "title": "A Night-Rain in Summer",
+          "creator": "James Henry Leigh Hunt"
+        },
+        {
+          "modality": "writing",
+          "rank": 3,
+          "item_id": "writing_1076",
+          "title": "The Star",
+          "creator": "Ann Taylor"
+        }
+      ],
+      "two_tower": [
+        {
+          "modality": "book",
+          "rank": 1,
+          "item_id": "book_0512",
+          "title": "The Polar Express",
+          "creator": "Chris Van Allsburg"
+        },
+        {
+          "modality": "book",
+          "rank": 2,
+          "item_id": "book_0203",
+          "title": "Siddhartha",
+          "creator": "Hermann Hesse, Hilda Rosner"
+        },
+        {
+          "modality": "book",
+          "rank": 3,
+          "item_id": "book_0583",
+          "title": "Along for the Ride",
+          "creator": "Sarah Dessen"
+        },
+        {
+          "modality": "film",
+          "rank": 1,
+          "item_id": "film_0200",
+          "title": "Das Boot",
+          "creator": "Radiant Film, Bavaria Film"
+        },
+        {
+          "modality": "film",
+          "rank": 2,
+          "item_id": "film_0402",
+          "title": "Frieren: Beyond Journey's End",
+          "creator": "Madhouse, TOHO"
+        },
+        {
+          "modality": "film",
+          "rank": 3,
+          "item_id": "film_0196",
+          "title": "Flow",
+          "creator": "Dream Well Studio, Sacrebleu Productions"
+        },
+        {
+          "modality": "music",
+          "rank": 1,
+          "item_id": "music_0086",
+          "title": "Stormy Nights",
+          "creator": "Stillness Sanctuary"
+        },
+        {
+          "modality": "music",
+          "rank": 2,
+          "item_id": "music_0434",
+          "title": "Man of Stone - Lake Bodom Recordings",
+          "creator": "Husky Rescue"
+        },
+        {
+          "modality": "music",
+          "rank": 3,
+          "item_id": "music_0096",
+          "title": "Satie / Orch. Ducros: Gymnop\u00e9die No. 1",
+          "creator": "Erik Satie, Gautier Capu\u00e7on"
+        },
+        {
+          "modality": "writing",
+          "rank": 1,
+          "item_id": "writing_0483",
+          "title": "A Night-Rain in Summer",
+          "creator": "James Henry Leigh Hunt"
+        },
+        {
+          "modality": "writing",
+          "rank": 2,
+          "item_id": "writing_1174",
+          "title": "When Hope but made Tranquillity be felt (fragment)",
+          "creator": "Samuel Coleridge"
+        },
+        {
+          "modality": "writing",
+          "rank": 3,
+          "item_id": "writing_1188",
+          "title": "The Moon, how definite its orb! (fragment)",
+          "creator": "Samuel Coleridge"
+        }
+      ]
+    },
+    "category": "high_cross_modal_coherence"
+  },
+  {
+    "case_id": "case_04",
+    "query": "like a memory of a summer I never had",
+    "query_profile": {
+      "reasoning": "The user is describing a sense of phantom nostalgia, a longing for a past that is idealized and dreamlike rather than factual. The experience is deeply introspective and bittersweet, shifting between the tactile warmth of summer and the cooling, detached haze of impossible memory. It captures the tension between grounded sensory details and the surreal nature of fictionalized history.",
+      "vibe_summary": "I feel a strange, hollow ache for a season I never actually lived through. It is an immersive, golden-drenched reverie where the edges of reality blur into the soft, sun-bleached static of an old photograph. There is a profound sense of solitariness, as I inhabit an ephemeral, imagined afternoon that feels more real than the present moment, leaving me suspended in a quiet, beautiful state of longing.",
+      "mood_vector": [
+        0.35,
+        0.2,
+        0.3,
+        0.1,
+        0.2,
+        0.3,
+        0.8,
+        0.2,
+        0.4,
+        0.6,
+        0.4,
+        0.2
+      ],
+      "intent_vector": [
+        0.4,
+        0.9,
+        0.2,
+        0.3,
+        0.8,
+        0.4,
+        0.6
+      ],
+      "aesthetic_tags": [
+        "golden-hour",
+        "tender",
+        "melancholic",
+        "retro-analog",
+        "liminal"
+      ]
+    },
+    "coherence_scores": {
+      "popularity": 0.07388339936733246,
+      "knn": 0.28575380394856137,
+      "two_tower": 0.14867508442451557
+    },
+    "modality_entropy": {
+      "popularity": 0.6128694524619496,
+      "knn": 0.9376369622724492,
+      "two_tower": 1.2580481453641945
+    },
+    "results_per_model": {
+      "popularity": [
+        {
+          "modality": "book",
+          "rank": 1,
+          "item_id": "book_0001",
+          "title": "The Hunger Games (The Hunger Games, #1)",
+          "creator": "Suzanne Collins"
+        },
+        {
+          "modality": "book",
+          "rank": 2,
+          "item_id": "book_0002",
+          "title": "Harry Potter and the Sorcerer's Stone (Harry Potter, #1)",
+          "creator": "J.K. Rowling, Mary GrandPr\u00e9"
+        },
+        {
+          "modality": "book",
+          "rank": 3,
+          "item_id": "book_0003",
+          "title": "Twilight (Twilight, #1)",
+          "creator": "Stephenie Meyer"
+        },
+        {
+          "modality": "film",
+          "rank": 1,
+          "item_id": "film_0583",
+          "title": "The Boys",
+          "creator": "Amazon Studios, Original Film"
+        },
+        {
+          "modality": "film",
+          "rank": 2,
+          "item_id": "film_0105",
+          "title": "Project Hail Mary",
+          "creator": "Lord Miller, Amazon MGM Studios"
+        },
+        {
+          "modality": "film",
+          "rank": 3,
+          "item_id": "film_0491",
+          "title": "The Rookie",
+          "creator": "ABC Studios, Entertainment One"
+        },
+        {
+          "modality": "music",
+          "rank": 1,
+          "item_id": "music_0474",
+          "title": "La Planta",
+          "creator": "Caos"
+        },
+        {
+          "modality": "music",
+          "rank": 2,
+          "item_id": "music_0473",
+          "title": "Low",
+          "creator": "SZA"
+        },
+        {
+          "modality": "music",
+          "rank": 3,
+          "item_id": "music_0475",
+          "title": "Say What",
+          "creator": "Rampa, Adam Port"
+        },
+        {
+          "modality": "writing",
+          "rank": 1,
+          "item_id": "writing_0404",
+          "title": "Political and Literary essays, 1908-1913",
+          "creator": "Cromer, Evelyn Baring, Earl of"
+        },
+        {
+          "modality": "writing",
+          "rank": 2,
+          "item_id": "writing_0203",
+          "title": "Essays \u2014 First Series",
+          "creator": "Emerson, Ralph Waldo"
+        },
+        {
+          "modality": "writing",
+          "rank": 3,
+          "item_id": "writing_0402",
+          "title": "English Critical Essays: Nineteenth Century",
+          "creator": ""
+        }
+      ],
+      "knn": [
+        {
+          "modality": "book",
+          "rank": 1,
+          "item_id": "book_0117",
+          "title": "Eleanor & Park",
+          "creator": "Rainbow Rowell"
+        },
+        {
+          "modality": "book",
+          "rank": 2,
+          "item_id": "book_0048",
+          "title": "Water for Elephants",
+          "creator": "Sara Gruen"
+        },
+        {
+          "modality": "book",
+          "rank": 3,
+          "item_id": "book_0379",
+          "title": "One Day",
+          "creator": "David Nicholls"
+        },
+        {
+          "modality": "film",
+          "rank": 1,
+          "item_id": "film_0082",
+          "title": "Hotarubi no Mori e",
+          "creator": "Brain's Base"
+        },
+        {
+          "modality": "film",
+          "rank": 2,
+          "item_id": "film_0473",
+          "title": "Over the Garden Wall",
+          "creator": "Cartoon Network Studios"
+        },
+        {
+          "modality": "film",
+          "rank": 3,
+          "item_id": "film_0026",
+          "title": "Cinema Paradiso",
+          "creator": "Cristaldifilm, Les Films Ariane"
+        },
+        {
+          "modality": "music",
+          "rank": 1,
+          "item_id": "music_0319",
+          "title": "What Once Was",
+          "creator": "Her's"
+        },
+        {
+          "modality": "music",
+          "rank": 2,
+          "item_id": "music_0348",
+          "title": "Save a Prayer - 2009 Remaster",
+          "creator": "Duran Duran"
+        },
+        {
+          "modality": "music",
+          "rank": 3,
+          "item_id": "music_0653",
+          "title": "Mariposa Traicionera - 2020 Remasterizado",
+          "creator": "Man\u00e1"
+        },
+        {
+          "modality": "writing",
+          "rank": 1,
+          "item_id": "writing_1073",
+          "title": "Memory",
+          "creator": "William Browne"
+        },
+        {
+          "modality": "writing",
+          "rank": 2,
+          "item_id": "writing_1175",
+          "title": "Reflections On Having Left A Place Of Retirement",
+          "creator": "Samuel Coleridge"
+        },
+        {
+          "modality": "writing",
+          "rank": 3,
+          "item_id": "writing_1067",
+          "title": "ENDYMION (For music)",
+          "creator": "Oscar Wilde"
+        }
+      ],
+      "two_tower": [
+        {
+          "modality": "book",
+          "rank": 1,
+          "item_id": "book_0551",
+          "title": "The Virgin Suicides",
+          "creator": "Jeffrey Eugenides"
+        },
+        {
+          "modality": "book",
+          "rank": 2,
+          "item_id": "book_0504",
+          "title": "Peter Pan",
+          "creator": "J.M. Barrie, Michael Hague"
+        },
+        {
+          "modality": "book",
+          "rank": 3,
+          "item_id": "book_0438",
+          "title": "The Paris Wife",
+          "creator": "Paula McLain"
+        },
+        {
+          "modality": "film",
+          "rank": 1,
+          "item_id": "film_0190",
+          "title": "Call Me by Your Name",
+          "creator": "La Cin\u00e9facture, Frenesy Film"
+        },
+        {
+          "modality": "film",
+          "rank": 2,
+          "item_id": "film_0185",
+          "title": "The Tale of The Princess Kaguya",
+          "creator": "Studio Ghibli, Hakuhodo DY Media Partners"
+        },
+        {
+          "modality": "film",
+          "rank": 3,
+          "item_id": "film_0473",
+          "title": "Over the Garden Wall",
+          "creator": "Cartoon Network Studios"
+        },
+        {
+          "modality": "music",
+          "rank": 1,
+          "item_id": "music_0695",
+          "title": "Blue Hair",
+          "creator": "TV Girl"
+        },
+        {
+          "modality": "music",
+          "rank": 2,
+          "item_id": "music_0348",
+          "title": "Save a Prayer - 2009 Remaster",
+          "creator": "Duran Duran"
+        },
+        {
+          "modality": "music",
+          "rank": 3,
+          "item_id": "music_0572",
+          "title": "Always Forever",
+          "creator": "Cults"
+        },
+        {
+          "modality": "writing",
+          "rank": 1,
+          "item_id": "writing_0880",
+          "title": "The last of Summer is Delight --",
+          "creator": "Emily Dickinson"
+        },
+        {
+          "modality": "writing",
+          "rank": 2,
+          "item_id": "writing_1132",
+          "title": "The Dumb Soldier",
+          "creator": "Robert Louis Stevenson"
+        },
+        {
+          "modality": "writing",
+          "rank": 3,
+          "item_id": "writing_0984",
+          "title": "Beauty and Beauty",
+          "creator": "Rupert Brooke"
+        }
+      ]
+    },
+    "category": "knn_two_tower_disagreement"
+  },
+  {
+    "case_id": "case_03",
+    "query": "energetic but not loud",
+    "query_profile": {
+      "reasoning": "The request seeks a sense of momentum and vitality without sensory overload or abrasive volume. This suggests a sleek, rhythmic experience that feels inherently active and capable but remains contained and sophisticated. The aesthetic focuses on clean lines and a steady, reliable tempo.",
+      "vibe_summary": "I experience this as a steady, focused current of movement. It feels like a clear-eyed brisk walk through a quiet city, where the rhythm is quick and engaging but the atmosphere remains composed. It is the sensory equivalent of a well-oiled machine or an invigorating espresso\u2014alert, capable, and ready for action without being chaotic or overwhelming.",
+      "mood_vector": [
+        0.65,
+        0.75,
+        0.5,
+        0.75,
+        0.3,
+        0.25,
+        0.4,
+        0.5,
+        0.7,
+        0.3,
+        0.6,
+        0.8
+      ],
+      "intent_vector": [
+        0.2,
+        0.4,
+        0.8,
+        0.9,
+        0.3,
+        0.5,
+        0.6
+      ],
+      "aesthetic_tags": [
+        "minimalist",
+        "glass",
+        "japandi",
+        "neon"
+      ]
+    },
+    "coherence_scores": {
+      "popularity": 0.07388339936733246,
+      "knn": 0.1495639911542336,
+      "two_tower": 0.18641174584627151
+    },
+    "modality_entropy": {
+      "popularity": 0.6128694524619496,
+      "knn": 0.1985152433458726,
+      "two_tower": 0.42270908780599087
+    },
+    "results_per_model": {
+      "popularity": [
+        {
+          "modality": "book",
+          "rank": 1,
+          "item_id": "book_0001",
+          "title": "The Hunger Games (The Hunger Games, #1)",
+          "creator": "Suzanne Collins"
+        },
+        {
+          "modality": "book",
+          "rank": 2,
+          "item_id": "book_0002",
+          "title": "Harry Potter and the Sorcerer's Stone (Harry Potter, #1)",
+          "creator": "J.K. Rowling, Mary GrandPr\u00e9"
+        },
+        {
+          "modality": "book",
+          "rank": 3,
+          "item_id": "book_0003",
+          "title": "Twilight (Twilight, #1)",
+          "creator": "Stephenie Meyer"
+        },
+        {
+          "modality": "film",
+          "rank": 1,
+          "item_id": "film_0583",
+          "title": "The Boys",
+          "creator": "Amazon Studios, Original Film"
+        },
+        {
+          "modality": "film",
+          "rank": 2,
+          "item_id": "film_0105",
+          "title": "Project Hail Mary",
+          "creator": "Lord Miller, Amazon MGM Studios"
+        },
+        {
+          "modality": "film",
+          "rank": 3,
+          "item_id": "film_0491",
+          "title": "The Rookie",
+          "creator": "ABC Studios, Entertainment One"
+        },
+        {
+          "modality": "music",
+          "rank": 1,
+          "item_id": "music_0474",
+          "title": "La Planta",
+          "creator": "Caos"
+        },
+        {
+          "modality": "music",
+          "rank": 2,
+          "item_id": "music_0473",
+          "title": "Low",
+          "creator": "SZA"
+        },
+        {
+          "modality": "music",
+          "rank": 3,
+          "item_id": "music_0475",
+          "title": "Say What",
+          "creator": "Rampa, Adam Port"
+        },
+        {
+          "modality": "writing",
+          "rank": 1,
+          "item_id": "writing_0404",
+          "title": "Political and Literary essays, 1908-1913",
+          "creator": "Cromer, Evelyn Baring, Earl of"
+        },
+        {
+          "modality": "writing",
+          "rank": 2,
+          "item_id": "writing_0203",
+          "title": "Essays \u2014 First Series",
+          "creator": "Emerson, Ralph Waldo"
+        },
+        {
+          "modality": "writing",
+          "rank": 3,
+          "item_id": "writing_0402",
+          "title": "English Critical Essays: Nineteenth Century",
+          "creator": ""
+        }
+      ],
+      "knn": [
+        {
+          "modality": "book",
+          "rank": 1,
+          "item_id": "book_0174",
+          "title": "Digital Fortress",
+          "creator": "Dan Brown"
+        },
+        {
+          "modality": "book",
+          "rank": 2,
+          "item_id": "book_0155",
+          "title": "Deception Point",
+          "creator": "Dan Brown"
+        },
+        {
+          "modality": "book",
+          "rank": 3,
+          "item_id": "book_0051",
+          "title": "Brave New World",
+          "creator": "Aldous Huxley"
+        },
+        {
+          "modality": "film",
+          "rank": 1,
+          "item_id": "film_0520",
+          "title": "Sherlock",
+          "creator": "Hartswood Films, BBC Cymru Wales"
+        },
+        {
+          "modality": "film",
+          "rank": 2,
+          "item_id": "film_0151",
+          "title": "Terminator 2: Judgment Day",
+          "creator": "Carolco Pictures, Pacific Western"
+        },
+        {
+          "modality": "film",
+          "rank": 3,
+          "item_id": "film_0332",
+          "title": "Aliens",
+          "creator": "SLM Production Group, 20th Century Fox"
+        },
+        {
+          "modality": "music",
+          "rank": 1,
+          "item_id": "music_0123",
+          "title": "Internal Rotation",
+          "creator": "Stefan Torto"
+        },
+        {
+          "modality": "music",
+          "rank": 2,
+          "item_id": "music_0074",
+          "title": "Killshot",
+          "creator": "Magdalena Bay"
+        },
+        {
+          "modality": "music",
+          "rank": 3,
+          "item_id": "music_0304",
+          "title": "Sweet Dreams (Are Made of This) - 2005 Remaster",
+          "creator": "Eurythmics, Annie Lennox"
+        },
+        {
+          "modality": "writing",
+          "rank": 1,
+          "item_id": "writing_0094",
+          "title": "Longform Podcast #572: Derek Thompson",
+          "creator": "editors"
+        },
+        {
+          "modality": "writing",
+          "rank": 2,
+          "item_id": "writing_0067",
+          "title": "Harmeet Dhillon Is Not Wasting Any Time",
+          "creator": "Quinta Jurecic"
+        },
+        {
+          "modality": "writing",
+          "rank": 3,
+          "item_id": "writing_0935",
+          "title": "Hope is a strange invention --",
+          "creator": "Emily Dickinson"
+        }
+      ],
+      "two_tower": [
+        {
+          "modality": "book",
+          "rank": 1,
+          "item_id": "book_0344",
+          "title": "The Secret (The Secret, #1)",
+          "creator": "Rhonda Byrne"
+        },
+        {
+          "modality": "book",
+          "rank": 2,
+          "item_id": "book_0562",
+          "title": "The Power of Habit: Why We Do What We Do in Life and Business",
+          "creator": "Charles Duhigg"
+        },
+        {
+          "modality": "book",
+          "rank": 3,
+          "item_id": "book_0350",
+          "title": "Who Moved My Cheese?",
+          "creator": "Spencer Johnson, Kenneth H. Blanchard"
+        },
+        {
+          "modality": "film",
+          "rank": 1,
+          "item_id": "film_0493",
+          "title": "Dr. STONE",
+          "creator": "TMS Entertainment, TOHO"
+        },
+        {
+          "modality": "film",
+          "rank": 2,
+          "item_id": "film_0427",
+          "title": "Fighting Spirit",
+          "creator": "Madhouse, MAPPA"
+        },
+        {
+          "modality": "film",
+          "rank": 3,
+          "item_id": "film_0541",
+          "title": "Cosmos",
+          "creator": "Fuzzy Door Productions, Cosmos Studios"
+        },
+        {
+          "modality": "music",
+          "rank": 1,
+          "item_id": "music_0734",
+          "title": "Manifest - Instrumental",
+          "creator": "MR. LU*"
+        },
+        {
+          "modality": "music",
+          "rank": 2,
+          "item_id": "music_0737",
+          "title": "Recomposed By Max Richter: Vivaldi, The Four Seasons: Spring 1 - 2012",
+          "creator": "Max Richter, Daniel Hope"
+        },
+        {
+          "modality": "music",
+          "rank": 3,
+          "item_id": "music_0214",
+          "title": "Pack Your Bags",
+          "creator": "Red Shaydez"
+        },
+        {
+          "modality": "writing",
+          "rank": 1,
+          "item_id": "writing_0028",
+          "title": "Ramona Ausubel\u2019s Favorite Exercise for Getting Unstuck",
+          "creator": "Ramona Ausubel"
+        },
+        {
+          "modality": "writing",
+          "rank": 2,
+          "item_id": "writing_0094",
+          "title": "Longform Podcast #572: Derek Thompson",
+          "creator": "editors"
+        },
+        {
+          "modality": "writing",
+          "rank": 3,
+          "item_id": "writing_0108",
+          "title": "Walden, and On The Duty Of Civil Disobedience",
+          "creator": "Thoreau, Henry David"
+        }
+      ]
+    },
+    "category": "modality_collapse"
+  },
+  {
+    "case_id": "case_08",
+    "query": "the feeling of leaving home for the first time",
+    "query_profile": {
+      "reasoning": "Leaving home for the first time is a seminal transition that balances the anxiety of the unknown against the expansive potential of the future. The mood is inherently bittersweet, grounded in the reality of parting but propelled by the promise of self-discovery. The aesthetic centers on the liminal state of transit and the quiet, melancholic observation of one's own history as it recedes into the rearview mirror.",
+      "vibe_summary": "I feel the soft ache of a door closing behind me and the sudden, bracing chill of the open road ahead. It is a quiet, breathless moment where everything familiar becomes an artifact of the past. There is a strange, shimmering tension between the safety I am abandoning and the vast, unwritten potential of a world that feels both terrifyingly large and deeply empty as I step into my solitude.",
+      "mood_vector": [
+        0.4,
+        0.65,
+        0.45,
+        0.6,
+        0.1,
+        0.3,
+        0.45,
+        0.2,
+        0.3,
+        0.5,
+        0.4,
+        0.7
+      ],
+      "intent_vector": [
+        0.3,
+        0.8,
+        0.2,
+        0.6,
+        0.9,
+        0.7,
+        0.2
+      ],
+      "aesthetic_tags": [
+        "liminal",
+        "melancholic",
+        "tender",
+        "golden-hour",
+        "water"
+      ]
+    },
+    "coherence_scores": {
+      "popularity": 0.07388339936733246,
+      "knn": 0.2714124371608098,
+      "two_tower": 0.18021239961187044
+    },
+    "modality_entropy": {
+      "popularity": 0.6128694524619496,
+      "knn": 1.2876716260045196,
+      "two_tower": 0.7909873504355757
+    },
+    "results_per_model": {
+      "popularity": [
+        {
+          "modality": "book",
+          "rank": 1,
+          "item_id": "book_0001",
+          "title": "The Hunger Games (The Hunger Games, #1)",
+          "creator": "Suzanne Collins"
+        },
+        {
+          "modality": "book",
+          "rank": 2,
+          "item_id": "book_0002",
+          "title": "Harry Potter and the Sorcerer's Stone (Harry Potter, #1)",
+          "creator": "J.K. Rowling, Mary GrandPr\u00e9"
+        },
+        {
+          "modality": "book",
+          "rank": 3,
+          "item_id": "book_0003",
+          "title": "Twilight (Twilight, #1)",
+          "creator": "Stephenie Meyer"
+        },
+        {
+          "modality": "film",
+          "rank": 1,
+          "item_id": "film_0583",
+          "title": "The Boys",
+          "creator": "Amazon Studios, Original Film"
+        },
+        {
+          "modality": "film",
+          "rank": 2,
+          "item_id": "film_0105",
+          "title": "Project Hail Mary",
+          "creator": "Lord Miller, Amazon MGM Studios"
+        },
+        {
+          "modality": "film",
+          "rank": 3,
+          "item_id": "film_0491",
+          "title": "The Rookie",
+          "creator": "ABC Studios, Entertainment One"
+        },
+        {
+          "modality": "music",
+          "rank": 1,
+          "item_id": "music_0474",
+          "title": "La Planta",
+          "creator": "Caos"
+        },
+        {
+          "modality": "music",
+          "rank": 2,
+          "item_id": "music_0473",
+          "title": "Low",
+          "creator": "SZA"
+        },
+        {
+          "modality": "music",
+          "rank": 3,
+          "item_id": "music_0475",
+          "title": "Say What",
+          "creator": "Rampa, Adam Port"
+        },
+        {
+          "modality": "writing",
+          "rank": 1,
+          "item_id": "writing_0404",
+          "title": "Political and Literary essays, 1908-1913",
+          "creator": "Cromer, Evelyn Baring, Earl of"
+        },
+        {
+          "modality": "writing",
+          "rank": 2,
+          "item_id": "writing_0203",
+          "title": "Essays \u2014 First Series",
+          "creator": "Emerson, Ralph Waldo"
+        },
+        {
+          "modality": "writing",
+          "rank": 3,
+          "item_id": "writing_0402",
+          "title": "English Critical Essays: Nineteenth Century",
+          "creator": ""
+        }
+      ],
+      "knn": [
+        {
+          "modality": "book",
+          "rank": 1,
+          "item_id": "book_0071",
+          "title": "The Host (The Host, #1)",
+          "creator": "Stephenie Meyer"
+        },
+        {
+          "modality": "book",
+          "rank": 2,
+          "item_id": "book_0290",
+          "title": "We Were Liars",
+          "creator": "E. Lockhart"
+        },
+        {
+          "modality": "book",
+          "rank": 3,
+          "item_id": "book_0263",
+          "title": "The Ocean at the End of the Lane",
+          "creator": "Neil Gaiman"
+        },
+        {
+          "modality": "film",
+          "rank": 1,
+          "item_id": "film_0309",
+          "title": "Weathering with You",
+          "creator": "CoMix Wave Films, Story"
+        },
+        {
+          "modality": "film",
+          "rank": 2,
+          "item_id": "film_0192",
+          "title": "Eternal Sunshine of the Spotless Mind",
+          "creator": "Focus Features, Anonymous Content"
+        },
+        {
+          "modality": "film",
+          "rank": 3,
+          "item_id": "film_0510",
+          "title": "Rascal Does Not Dream of Bunny Girl Senpai",
+          "creator": "CloverWorks, Aniplex"
+        },
+        {
+          "modality": "music",
+          "rank": 1,
+          "item_id": "music_0797",
+          "title": "One Summer Day",
+          "creator": "Joe Hisaishi"
+        },
+        {
+          "modality": "music",
+          "rank": 2,
+          "item_id": "music_0576",
+          "title": "Let Down",
+          "creator": "Radiohead"
+        },
+        {
+          "modality": "music",
+          "rank": 3,
+          "item_id": "music_0348",
+          "title": "Save a Prayer - 2009 Remaster",
+          "creator": "Duran Duran"
+        },
+        {
+          "modality": "writing",
+          "rank": 1,
+          "item_id": "writing_0984",
+          "title": "Beauty and Beauty",
+          "creator": "Rupert Brooke"
+        },
+        {
+          "modality": "writing",
+          "rank": 2,
+          "item_id": "writing_0867",
+          "title": "I started Early -- Took my Dog --",
+          "creator": "Emily Dickinson"
+        },
+        {
+          "modality": "writing",
+          "rank": 3,
+          "item_id": "writing_0603",
+          "title": "I Years had been from Home",
+          "creator": "Emily Dickinson"
+        }
+      ],
+      "two_tower": [
+        {
+          "modality": "book",
+          "rank": 1,
+          "item_id": "book_0062",
+          "title": "The Curious Incident of the Dog in the Night-Time",
+          "creator": "Mark Haddon"
+        },
+        {
+          "modality": "book",
+          "rank": 2,
+          "item_id": "book_0088",
+          "title": "Where the Wild Things Are",
+          "creator": "Maurice Sendak"
+        },
+        {
+          "modality": "book",
+          "rank": 3,
+          "item_id": "book_0383",
+          "title": "Hatchet (Brian's Saga, #1)",
+          "creator": "Gary Paulsen"
+        },
+        {
+          "modality": "film",
+          "rank": 1,
+          "item_id": "film_0117",
+          "title": "Puss in Boots: The Last Wish",
+          "creator": "DreamWorks Animation"
+        },
+        {
+          "modality": "film",
+          "rank": 2,
+          "item_id": "film_0049",
+          "title": "Spider-Man: Across the Spider-Verse",
+          "creator": "Columbia Pictures, Sony Pictures Animation"
+        },
+        {
+          "modality": "film",
+          "rank": 3,
+          "item_id": "film_0568",
+          "title": "The Good Doctor",
+          "creator": "ABC Studios, 3AD"
+        },
+        {
+          "modality": "music",
+          "rank": 1,
+          "item_id": "music_0757",
+          "title": "Scared To Start",
+          "creator": "Michael Marcagi"
+        },
+        {
+          "modality": "music",
+          "rank": 2,
+          "item_id": "music_0774",
+          "title": "My Goodbye",
+          "creator": "Jorge Rivera-Herrans, Teagan Earley"
+        },
+        {
+          "modality": "music",
+          "rank": 3,
+          "item_id": "music_0745",
+          "title": "I Still Haven't Found What I'm Looking For - Remastered 2007",
+          "creator": "U2"
+        },
+        {
+          "modality": "writing",
+          "rank": 1,
+          "item_id": "writing_0769",
+          "title": "Tie the Strings to my Life, My Lord,",
+          "creator": "Emily Dickinson"
+        },
+        {
+          "modality": "writing",
+          "rank": 2,
+          "item_id": "writing_0600",
+          "title": "He put the Belt around my life",
+          "creator": "Emily Dickinson"
+        },
+        {
+          "modality": "writing",
+          "rank": 3,
+          "item_id": "writing_0926",
+          "title": "Beauty crowds me till I die",
+          "creator": "Emily Dickinson"
+        }
+      ]
+    },
+    "category": "high_cross_modal_coherence"
+  },
+  {
+    "case_id": "case_06",
+    "query": "surprise me",
+    "query_profile": {
+      "reasoning": "The request for 'surprise' necessitates a high degree of strangeness, intensity, and ambiguity. To fulfill this, the profile prioritizes unpredictability, leaning away from the familiar and the slow-paced. The experience is designed to be jarring yet thought-provoking, pushing the viewer out of their comfort zone.",
+      "vibe_summary": "I feel the floor drop out from under me as the familiar world dissolves into a kaleidoscope of the unexpected. There is a sharp, jagged edge to this experience that cuts through my expectations, leaving me disoriented but intensely alert. It is not designed for comfort; it is designed to disrupt my internal rhythm and force me to look at reality from a completely unstable, unfamiliar angle.",
+      "mood_vector": [
+        0.4,
+        0.8,
+        0.7,
+        0.9,
+        0.2,
+        0.8,
+        0.9,
+        0.8,
+        0.3,
+        0.9,
+        0.3,
+        0.9
+      ],
+      "intent_vector": [
+        0.1,
+        0.9,
+        0.1,
+        0.4,
+        0.7,
+        0.8,
+        0.1
+      ],
+      "aesthetic_tags": [
+        "liminal",
+        "neon",
+        "glass",
+        "nocturnal"
+      ]
+    },
+    "coherence_scores": {
+      "popularity": 0.07388339936733246,
+      "knn": 0.17560792962710062,
+      "two_tower": 0.14508123323321342
+    },
+    "modality_entropy": {
+      "popularity": 0.6128694524619496,
+      "knn": 1.2899219826090118,
+      "two_tower": 0.9433483923290391
+    },
+    "results_per_model": {
+      "popularity": [
+        {
+          "modality": "book",
+          "rank": 1,
+          "item_id": "book_0001",
+          "title": "The Hunger Games (The Hunger Games, #1)",
+          "creator": "Suzanne Collins"
+        },
+        {
+          "modality": "book",
+          "rank": 2,
+          "item_id": "book_0002",
+          "title": "Harry Potter and the Sorcerer's Stone (Harry Potter, #1)",
+          "creator": "J.K. Rowling, Mary GrandPr\u00e9"
+        },
+        {
+          "modality": "book",
+          "rank": 3,
+          "item_id": "book_0003",
+          "title": "Twilight (Twilight, #1)",
+          "creator": "Stephenie Meyer"
+        },
+        {
+          "modality": "film",
+          "rank": 1,
+          "item_id": "film_0583",
+          "title": "The Boys",
+          "creator": "Amazon Studios, Original Film"
+        },
+        {
+          "modality": "film",
+          "rank": 2,
+          "item_id": "film_0105",
+          "title": "Project Hail Mary",
+          "creator": "Lord Miller, Amazon MGM Studios"
+        },
+        {
+          "modality": "film",
+          "rank": 3,
+          "item_id": "film_0491",
+          "title": "The Rookie",
+          "creator": "ABC Studios, Entertainment One"
+        },
+        {
+          "modality": "music",
+          "rank": 1,
+          "item_id": "music_0474",
+          "title": "La Planta",
+          "creator": "Caos"
+        },
+        {
+          "modality": "music",
+          "rank": 2,
+          "item_id": "music_0473",
+          "title": "Low",
+          "creator": "SZA"
+        },
+        {
+          "modality": "music",
+          "rank": 3,
+          "item_id": "music_0475",
+          "title": "Say What",
+          "creator": "Rampa, Adam Port"
+        },
+        {
+          "modality": "writing",
+          "rank": 1,
+          "item_id": "writing_0404",
+          "title": "Political and Literary essays, 1908-1913",
+          "creator": "Cromer, Evelyn Baring, Earl of"
+        },
+        {
+          "modality": "writing",
+          "rank": 2,
+          "item_id": "writing_0203",
+          "title": "Essays \u2014 First Series",
+          "creator": "Emerson, Ralph Waldo"
+        },
+        {
+          "modality": "writing",
+          "rank": 3,
+          "item_id": "writing_0402",
+          "title": "English Critical Essays: Nineteenth Century",
+          "creator": ""
+        }
+      ],
+      "knn": [
+        {
+          "modality": "book",
+          "rank": 1,
+          "item_id": "book_0375",
+          "title": "Do Androids Dream of Electric Sheep?",
+          "creator": "Philip K. Dick, Roger Zelazny"
+        },
+        {
+          "modality": "book",
+          "rank": 2,
+          "item_id": "book_0459",
+          "title": "Neuromancer",
+          "creator": "William Gibson"
+        },
+        {
+          "modality": "book",
+          "rank": 3,
+          "item_id": "book_0312",
+          "title": "Delirium (Delirium, #1)",
+          "creator": "Lauren Oliver"
+        },
+        {
+          "modality": "film",
+          "rank": 1,
+          "item_id": "film_0353",
+          "title": "Akira",
+          "creator": "MBS, Sumitomo Corporation"
+        },
+        {
+          "modality": "film",
+          "rank": 2,
+          "item_id": "film_0372",
+          "title": "Heat",
+          "creator": "Warner Bros. Pictures, Regency Enterprises"
+        },
+        {
+          "modality": "film",
+          "rank": 3,
+          "item_id": "film_0483",
+          "title": "Shadow Hunter",
+          "creator": "Sorcery Films, Ocean Entertainment"
+        },
+        {
+          "modality": "music",
+          "rank": 1,
+          "item_id": "music_0177",
+          "title": "Goth",
+          "creator": "Sidewalks and Skeletons"
+        },
+        {
+          "modality": "music",
+          "rank": 2,
+          "item_id": "music_0464",
+          "title": "West End Girls - 2018 Remaster",
+          "creator": "Pet Shop Boys"
+        },
+        {
+          "modality": "music",
+          "rank": 3,
+          "item_id": "music_0844",
+          "title": "I See Everything In Your Eyes - Original Mix",
+          "creator": "Detro"
+        },
+        {
+          "modality": "writing",
+          "rank": 1,
+          "item_id": "writing_0992",
+          "title": "The Night Journey",
+          "creator": "Rupert Brooke"
+        },
+        {
+          "modality": "writing",
+          "rank": 2,
+          "item_id": "writing_0043",
+          "title": "Is AI already conscious?",
+          "creator": "Aeon Video"
+        },
+        {
+          "modality": "writing",
+          "rank": 3,
+          "item_id": "writing_0694",
+          "title": "Dying at my music!",
+          "creator": "Emily Dickinson"
+        }
+      ],
+      "two_tower": [
+        {
+          "modality": "book",
+          "rank": 1,
+          "item_id": "book_0057",
+          "title": "The Hitchhiker's Guide to the Galaxy (Hitchhiker's Guide to the Galaxy, #1)",
+          "creator": "Douglas Adams"
+        },
+        {
+          "modality": "book",
+          "rank": 2,
+          "item_id": "book_0475",
+          "title": "Breakfast of Champions",
+          "creator": "Kurt Vonnegut Jr."
+        },
+        {
+          "modality": "book",
+          "rank": 3,
+          "item_id": "book_0386",
+          "title": "Stranger in a Strange Land",
+          "creator": "Robert A. Heinlein"
+        },
+        {
+          "modality": "film",
+          "rank": 1,
+          "item_id": "film_0416",
+          "title": "Rick and Morty",
+          "creator": "Williams Street, Harmonious Claptrap"
+        },
+        {
+          "modality": "film",
+          "rank": 2,
+          "item_id": "film_0042",
+          "title": "Inception",
+          "creator": "Legendary Pictures, Syncopy"
+        },
+        {
+          "modality": "film",
+          "rank": 3,
+          "item_id": "film_0145",
+          "title": "The Truman Show",
+          "creator": "Paramount Pictures, Scott Rudin Productions"
+        },
+        {
+          "modality": "music",
+          "rank": 1,
+          "item_id": "music_0717",
+          "title": "Etudes, Book 2: No. 14, Coloana infinita",
+          "creator": "Gy\u00f6rgy Ligeti, Lucille Chung"
+        },
+        {
+          "modality": "music",
+          "rank": 2,
+          "item_id": "music_0723",
+          "title": "Ecstatic Fragmentic - Original Mix",
+          "creator": "2nd Gen"
+        },
+        {
+          "modality": "music",
+          "rank": 3,
+          "item_id": "music_0925",
+          "title": "WTF W/Rick And Morty",
+          "creator": "Advanced Suite"
+        },
+        {
+          "modality": "writing",
+          "rank": 1,
+          "item_id": "writing_0043",
+          "title": "Is AI already conscious?",
+          "creator": "Aeon Video"
+        },
+        {
+          "modality": "writing",
+          "rank": 2,
+          "item_id": "writing_0033",
+          "title": "Join the dots",
+          "creator": "Jenny Greene"
+        },
+        {
+          "modality": "writing",
+          "rank": 3,
+          "item_id": "writing_0653",
+          "title": "Nature affects to be sedate",
+          "creator": "Emily Dickinson"
+        }
+      ]
+    },
+    "category": "knn_two_tower_disagreement"
+  }
+]

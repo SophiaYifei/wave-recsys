@@ -205,3 +205,43 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# ---------------------------------------------------------------------------
+# Wave project — data, models, frontend, planning docs
+# ---------------------------------------------------------------------------
+
+# Raw + processed data (large files; keep .gitkeep markers tracked)
+data/raw/**/*.jsonl
+data/raw/**/*.csv
+data/processed/features.npz
+data/processed/profiles.jsonl
+data/processed/paraphrase_queries.jsonl
+data/processed/paraphrase_queries_featurized.npz
+data/processed/paraphrase_query_profiles.jsonl
+data/processed/catalog.jsonl
+data/processed/ab_sample_ids.txt
+data/processed/ab_profile_review.txt
+data/processed/*.log
+data/processed/recommend_cache.json
+data/processed/recommend_cache.json.tmp
+
+# Model binaries
+models/two_tower/*.pt
+
+# Frontend
+node_modules/
+.next/
+out/
+
+# Misc
+.DS_Store
+*.log
+
+# Development planning docs — NEVER commit these to public repo
+wave_spec*.md
+*_blueprint*.md
+*_planning*.md
+notes/
+.claude/
+CLAUDE.md
+

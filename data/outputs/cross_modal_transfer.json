@@ -1,0 +1,45 @@
+{
+  "baseline_NDCG@10": 0.2002275630057956,
+  "holdouts": {
+    "book": {
+      "test_NDCG@10": 0.1216,
+      "test_P@10": 0.2376,
+      "test_MAP@10": 0.0864,
+      "test_NDCG@5": 0.0934,
+      "test_P@5": 0.1504,
+      "best_epoch": 17,
+      "best_val_NDCG@10": 0.1856,
+      "elapsed_sec": 5.673640251159668
+    },
+    "film": {
+      "test_NDCG@10": 0.14,
+      "test_P@10": 0.2677,
+      "test_MAP@10": 0.1016,
+      "test_NDCG@5": 0.1068,
+      "test_P@5": 0.1645,
+      "best_epoch": 16,
+      "best_val_NDCG@10": 0.1735,
+      "elapsed_sec": 5.621644973754883
+    },
+    "music": {
+      "test_NDCG@10": 0.1052,
+      "test_P@10": 0.2065,
+      "test_MAP@10": 0.0747,
+      "test_NDCG@5": 0.0794,
+      "test_P@5": 0.1263,
+      "best_epoch": 19,
+      "best_val_NDCG@10": 0.1858,
+      "elapsed_sec": 5.699841022491455
+    },
+    "writing": {
+      "test_NDCG@10": 0.0987,
+      "test_P@10": 0.1883,
+      "test_MAP@10": 0.0717,
+      "test_NDCG@5": 0.0763,
+      "test_P@5": 0.1187,
+      "best_epoch": 10,
+      "best_val_NDCG@10": 0.1745,
+      "elapsed_sec": 3.819648027420044
+    }
+  }
+}
