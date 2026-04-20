@@ -33,7 +33,7 @@ Cross-modal mood-aligned content recommendation. Describe a feeling, get a book,
    python scripts/generate_profiles.py --step=paraphrase
    python scripts/features.py --step=build
    python scripts/train.py --model=knn
-   python scripts/train.py --model=two_tower
+   python scripts/train.py --model=two_tower --embed-dim 64 --max-epochs 40
    python scripts/evaluate.py
    ```
 
