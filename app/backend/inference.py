@@ -13,6 +13,7 @@ in lieu of a shared wave/models package.
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -26,6 +27,76 @@ sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
 from train import TwoTower  # noqa: E402
 from sentence_transformers import SentenceTransformer  # noqa: E402
+
+
+# ---------------------------------------------------------------------------
+# Runtime artifact bootstrap (HuggingFace -> local disk)
+# ---------------------------------------------------------------------------
+# In production (Railway / other host) these files are too big for the git
+# repo, so we store them in a HuggingFace repo and download on first boot.
+# Local dev machines that built their own features.npz / model.pt keep those
+# files on disk, so bootstrap is a no-op for them.
+
+# (filename on HF repo, local path under REPO_ROOT).
+# The HF repo uses a flat layout (all artifacts in repo root) while the
+# backend expects the canonical nested project paths. We keep the mapping
+# explicit so the two layouts can diverge without code churn.
+ARTIFACTS: List[tuple] = [
+    ("catalog.jsonl", "data/processed/catalog.jsonl"),
+    ("profiles.jsonl", "data/processed/profiles.jsonl"),
+    ("features.npz", "data/processed/features.npz"),
+    ("model.pt", "models/two_tower/model.pt"),
+    ("config.pt", "models/two_tower/config.pt"),
+    ("weights.json", "models/knn_weights/weights.json"),
+]
+
+
+def download_artifacts_if_missing(repo_root: Optional[Path] = None) -> None:
+    """Ensure every required artifact exists under repo_root.
+
+    - If all artifacts already exist on disk -> no-op (local dev path).
+    - Else -> download only the missing ones from HF repo `HF_REPO_ID`
+      (env var; token from `HF_TOKEN` when private). Default repo_type is
+      `dataset`; override with `HF_REPO_TYPE` if you store artifacts in a
+      model repo instead.
+    """
+    root = Path(repo_root) if repo_root is not None else REPO_ROOT
+    missing = [(hf_name, rel) for hf_name, rel in ARTIFACTS if not (root / rel).exists()]
+    if not missing:
+        print(
+            "[bootstrap] all artifacts present locally; skipping HF download",
+            flush=True,
+        )
+        return
+
+    repo_id = os.environ.get("HF_REPO_ID")
+    if not repo_id:
+        raise RuntimeError(
+            f"[bootstrap] HF_REPO_ID env var required to fetch missing artifacts; "
+            f"missing = {[r for _, r in missing]}"
+        )
+    repo_type = os.environ.get("HF_REPO_TYPE", "dataset")
+    token = os.environ.get("HF_TOKEN") or None  # empty string also means anon
+
+    from huggingface_hub import hf_hub_download
+
+    print(
+        f"[bootstrap] downloading {len(missing)} artifact(s) from "
+        f"{repo_type}:{repo_id}",
+        flush=True,
+    )
+    for hf_name, rel_path in missing:
+        target = root / rel_path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        print(f"[bootstrap]   - {hf_name} -> {rel_path}", flush=True)
+        hf_hub_download(
+            repo_id=repo_id,
+            filename=hf_name,
+            repo_type=repo_type,
+            token=token,
+            local_dir=str(target.parent),
+        )
+    print("[bootstrap] download complete", flush=True)
 
 CATALOG_PATH = REPO_ROOT / "data" / "processed" / "catalog.jsonl"
 FEATURES_PATH = REPO_ROOT / "data" / "processed" / "features.npz"

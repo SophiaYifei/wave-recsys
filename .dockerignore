@@ -1,0 +1,41 @@
+# Keep the Docker build context small. Production downloads data/ + models/
+# from HF on startup, so they never need to enter the image.
+
+# Heavy runtime artifacts (downloaded from HF at startup)
+data/
+models/
+
+# Frontend is deployed separately on Vercel
+app/frontend/
+
+# Dev-only / non-source directories
+notebooks/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+__pycache__/
+*.pyc
+*.pyo
+
+# Secrets + local env
+.env
+.env.*
+
+# Planning docs (private)
+.claude/
+CLAUDE.md
+wave_spec*.md
+notes/
+
+# Git / editor / OS
+.git/
+.github/
+.gitignore
+.vscode/
+.idea/
+.DS_Store
+
+# Logs
+*.log

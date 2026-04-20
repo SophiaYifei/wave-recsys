@@ -16,6 +16,7 @@ from __future__ import annotations
 import asyncio
 import hashlib
 import json
+import os
 import sys
 import time
 from contextlib import asynccontextmanager
@@ -28,7 +29,11 @@ from fastapi.middleware.cors import CORSMiddleware
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
-from app.backend.inference import MODALITIES, get_engine  # noqa: E402
+from app.backend.inference import (  # noqa: E402
+    MODALITIES,
+    download_artifacts_if_missing,
+    get_engine,
+)
 from app.backend.llm_client import get_client  # noqa: E402
 from app.backend.models import (  # noqa: E402
     ProductCard,
@@ -161,6 +166,10 @@ async def _why_this(query: str, item: Dict[str, Any]) -> str:
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     t0 = time.time()
+    # Bootstrap: pull any missing runtime artifacts (catalog / features / model
+    # weights) from HF before loading the engine. No-op when the dev machine
+    # already has them on disk from local training.
+    download_artifacts_if_missing()
     _ = get_engine()  # eager load on startup
     _load_cache_from_disk()
     print(f"[lifespan] engine ready ({time.time() - t0:.1f}s)", flush=True)
@@ -173,12 +182,15 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+_cors_env = os.environ.get(
+    "CORS_ALLOWED_ORIGINS",
+    "http://localhost:3000,http://localhost:5173",
+)
+_cors_origins = [o.strip() for o in _cors_env.split(",") if o.strip()]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "http://localhost:5173",
-    ],
+    allow_origins=_cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
