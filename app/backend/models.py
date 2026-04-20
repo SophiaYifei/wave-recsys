@@ -48,6 +48,23 @@ class RecommendResponse(BaseModel):
     results: Dict[str, List[ProductCard]]
 
 
+class SwapRequest(BaseModel):
+    """Swap out one card in a previously-cached recommendation for the next-ranked
+    item in that modality. Same (query, model, modalities, image) combination
+    must have been submitted via /api/recommend first (cache key lookup)."""
+    query: str = Field(default="", max_length=1000)
+    modalities: Optional[List[str]] = None
+    model: str = Field(default="two_tower")
+    image_base64: Optional[str] = Field(default=None, max_length=7_000_000)
+    swap_modality: str  # which modality's card to replace
+    exclude_ids: List[str] = Field(default_factory=list)  # already-shown ids to skip
+
+
+class SwapResponse(BaseModel):
+    query_profile: QueryProfile
+    results: Dict[str, List[ProductCard]]
+
+
 class RecommendAllRequest(BaseModel):
     query: str = Field(..., min_length=1, max_length=1000)
     modalities: Optional[List[str]] = None  # None -> all four

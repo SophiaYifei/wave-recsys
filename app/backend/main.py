@@ -42,7 +42,11 @@ from app.backend.models import (  # noqa: E402
     RecommendAllResponse,
     RecommendRequest,
     RecommendResponse,
+    SwapRequest,
+    SwapResponse,
 )
+import numpy as np  # noqa: E402
+import torch  # noqa: E402
 
 
 # ---------------------------------------------------------------------------
@@ -385,6 +389,115 @@ async def recommend(req: RecommendRequest) -> RecommendResponse:
     _recommend_cache[cache_key] = response
     await _save_cache_to_disk()
     return response
+
+
+@app.post("/api/swap", response_model=SwapResponse)
+async def swap(req: SwapRequest) -> SwapResponse:
+    """Replace one modality's card with the next-ranked item excluding
+    `exclude_ids`. Reuses the cached query profile, so no profile LLM call is
+    needed — only a single `why_this` caption is billed (~$0.0002 per swap).
+    The cached response is rewritten in-place so the next /api/recommend hit
+    for the same (query, model, modalities, image) returns the swapped state.
+    """
+    engine = get_engine()
+
+    requested = req.modalities or list(MODALITIES)
+    for m in requested:
+        if m not in MODALITIES:
+            raise HTTPException(
+                status_code=400,
+                detail=f"unknown modality {m!r}; valid: {MODALITIES}",
+            )
+    if req.swap_modality not in requested:
+        raise HTTPException(
+            status_code=400,
+            detail=f"swap_modality {req.swap_modality!r} must be one of the "
+                   f"requested modalities {requested}",
+        )
+    if req.model not in {"popularity", "knn", "two_tower"}:
+        raise HTTPException(
+            status_code=400,
+            detail=f"unknown model {req.model!r}",
+        )
+
+    # The swap is always a cache edit: the original submission must have
+    # already populated this key via /api/recommend.
+    cache_key = _cache_key(req.query, req.model, requested, req.image_base64)
+    cached = _recommend_cache.get(cache_key)
+    if cached is None:
+        raise HTTPException(
+            status_code=409,
+            detail="no cached recommendation found for this query; submit "
+                   "via /api/recommend first",
+        )
+
+    # Reconstruct query features from the cached profile — no LLM profile call.
+    profile_dict = {
+        "vibe_summary": cached.query_profile.vibe_summary,
+        "mood_vector": list(cached.query_profile.mood_vector),
+        "intent_vector": list(cached.query_profile.intent_vector),
+        "aesthetic_tags": list(cached.query_profile.aesthetic_tags),
+    }
+    q_feats = engine.query_features_from_profile(profile_dict)
+    scores = engine.score(req.model, q_feats)
+
+    # Mask to the swap modality, argsort, walk down until an id not in exclude.
+    exclude_set = set(req.exclude_ids)
+    modality_mask = torch.from_numpy(engine.item_modalities == req.swap_modality)
+    masked = scores.clone()
+    masked[~modality_mask] = -1e9
+    ranked = masked.argsort(descending=True).tolist()
+
+    new_idx = None
+    for idx in ranked:
+        iid = str(engine.item_ids[idx])
+        if iid in exclude_set:
+            continue
+        if scores[idx].item() <= -1e8:
+            break  # ran off the end of this modality
+        new_idx = idx
+        break
+
+    if new_idx is None:
+        raise HTTPException(
+            status_code=404,
+            detail=f"no more items left in modality {req.swap_modality}; "
+                   f"{len(exclude_set)} already shown",
+        )
+
+    iid = str(engine.item_ids[new_idx])
+    cat_item = engine.catalog[iid]
+    q_for_caption = req.query.strip() or str(profile_dict.get("vibe_summary") or "")
+    why = await _why_this(q_for_caption, cat_item)
+
+    try:
+        year = int(cat_item.get("year") or 0)
+    except (TypeError, ValueError):
+        year = 0
+    new_card = ProductCard(
+        id=iid,
+        modality=cat_item.get("modality", req.swap_modality),
+        title=str(cat_item.get("title") or ""),
+        creator=str(cat_item.get("creator") or ""),
+        year=year,
+        cover_url=str(cat_item.get("cover_url") or ""),
+        external_url=str(cat_item.get("external_url") or ""),
+        similarity=float(scores[new_idx].item()),
+        why_this=why,
+        subtype=str((cat_item.get("modality_specific") or {}).get("type") or ""),
+        excerpt=str(cat_item.get("description") or ""),
+    )
+
+    # Replace in cached response + persist so the next /api/recommend hit
+    # returns the swapped state.
+    cached.results[req.swap_modality] = [new_card]
+    _recommend_cache[cache_key] = cached
+    await _save_cache_to_disk()
+
+    return SwapResponse(
+        query_profile=cached.query_profile,
+        results=cached.results,
+    )
 
 
 @app.post("/api/recommend_all", response_model=RecommendAllResponse)
