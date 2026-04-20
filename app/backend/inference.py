@@ -37,13 +37,17 @@ from sentence_transformers import SentenceTransformer  # noqa: E402
 # Local dev machines that built their own features.npz / model.pt keep those
 # files on disk, so bootstrap is a no-op for them.
 
-ARTIFACTS: List[str] = [
-    "data/processed/catalog.jsonl",
-    "data/processed/profiles.jsonl",
-    "data/processed/features.npz",
-    "models/two_tower/model.pt",
-    "models/two_tower/config.pt",
-    "models/knn_weights/weights.json",
+# (filename on HF repo, local path under REPO_ROOT).
+# The HF repo uses a flat layout (all artifacts in repo root) while the
+# backend expects the canonical nested project paths. We keep the mapping
+# explicit so the two layouts can diverge without code churn.
+ARTIFACTS: List[tuple] = [
+    ("catalog.jsonl", "data/processed/catalog.jsonl"),
+    ("profiles.jsonl", "data/processed/profiles.jsonl"),
+    ("features.npz", "data/processed/features.npz"),
+    ("model.pt", "models/two_tower/model.pt"),
+    ("config.pt", "models/two_tower/config.pt"),
+    ("weights.json", "models/knn_weights/weights.json"),
 ]
 
 
@@ -57,7 +61,7 @@ def download_artifacts_if_missing(repo_root: Optional[Path] = None) -> None:
       model repo instead.
     """
     root = Path(repo_root) if repo_root is not None else REPO_ROOT
-    missing = [a for a in ARTIFACTS if not (root / a).exists()]
+    missing = [(hf_name, rel) for hf_name, rel in ARTIFACTS if not (root / rel).exists()]
     if not missing:
         print(
             "[bootstrap] all artifacts present locally; skipping HF download",
@@ -69,10 +73,10 @@ def download_artifacts_if_missing(repo_root: Optional[Path] = None) -> None:
     if not repo_id:
         raise RuntimeError(
             f"[bootstrap] HF_REPO_ID env var required to fetch missing artifacts; "
-            f"missing = {missing}"
+            f"missing = {[r for _, r in missing]}"
         )
     repo_type = os.environ.get("HF_REPO_TYPE", "dataset")
-    token = os.environ.get("HF_TOKEN")  # None is fine for public repos
+    token = os.environ.get("HF_TOKEN") or None  # empty string also means anon
 
     from huggingface_hub import hf_hub_download
 
@@ -81,16 +85,16 @@ def download_artifacts_if_missing(repo_root: Optional[Path] = None) -> None:
         f"{repo_type}:{repo_id}",
         flush=True,
     )
-    for rel_path in missing:
+    for hf_name, rel_path in missing:
         target = root / rel_path
         target.parent.mkdir(parents=True, exist_ok=True)
-        print(f"[bootstrap]   - {rel_path}", flush=True)
+        print(f"[bootstrap]   - {hf_name} -> {rel_path}", flush=True)
         hf_hub_download(
             repo_id=repo_id,
-            filename=rel_path,
+            filename=hf_name,
             repo_type=repo_type,
             token=token,
-            local_dir=str(root),
+            local_dir=str(target.parent),
         )
     print("[bootstrap] download complete", flush=True)
 
