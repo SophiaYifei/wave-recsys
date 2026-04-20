@@ -222,6 +222,8 @@ data/processed/catalog.jsonl
 data/processed/ab_sample_ids.txt
 data/processed/ab_profile_review.txt
 data/processed/*.log
+data/processed/recommend_cache.json
+data/processed/recommend_cache.json.tmp
 
 # Model binaries
 models/two_tower/*.pt
