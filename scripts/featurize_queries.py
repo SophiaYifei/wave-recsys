@@ -4,16 +4,16 @@ Usage:
     python scripts/featurize_queries.py --step {profile,build,all} [--concurrency N]
 
 Runs each paraphrase query_text through the same LLM profile pipeline as
-scripts/profile.py (with a query-framed user prompt; same SYSTEM_PROMPT),
+scripts/generate_profiles.py (with a query-framed user prompt; same SYSTEM_PROMPT),
 then encodes the resulting vibe_summary with sentence-transformers and writes
 data/processed/paraphrase_queries_featurized.npz per spec §5.4.
 
 Intermediate per-query profile cache is kept at paraphrase_query_profiles.jsonl
 for resumability.
 
-Modality assignment for queries: queries are nominally modality-agnostic, but
-for training signal we attribute each query's modality_onehot from its source
-item (spec §5.4 KNN loss treats s_mod as a learnable-weighted component).
+Modality for queries: queries are nominally modality-agnostic. build_npz()
+explicitly zeros modality_onehot to avoid label leakage during inference; the
+source-item modality is stored only as metadata for stratified splitting.
 """
 
 from __future__ import annotations
@@ -97,7 +97,7 @@ async def profile_query(query_text: str, query_id: str) -> "tuple[Dict[str, Any]
 async def run_query_profile_step(concurrency: int) -> None:
     if not PARAPHRASE_JSONL.exists():
         print(
-            f"ERROR: {PARAPHRASE_JSONL} not found; run profile.py --step=paraphrase first",
+            f"ERROR: {PARAPHRASE_JSONL} not found; run generate_profiles.py --step=paraphrase first",
             file=sys.stderr,
         )
         sys.exit(1)

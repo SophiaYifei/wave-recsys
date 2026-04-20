@@ -262,7 +262,13 @@ class PairDataset(Dataset):
     def __getitem__(self, i: int) -> Tuple[int, int]:
         qi = int(self.q_indices[i])
         item_id = str(self.queries["item_ids"][qi])
-        ii = self.item_id_to_idx.get(item_id, -1)
+        if item_id not in self.item_id_to_idx:
+            raise KeyError(
+                f"PairDataset: item_id {item_id!r} (query index {qi}) not found in "
+                "item_id_to_idx. Check that features.npz and paraphrase_queries_featurized.npz "
+                "were built from the same catalog."
+            )
+        ii = self.item_id_to_idx[item_id]
         return qi, ii
 
 

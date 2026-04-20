@@ -209,17 +209,19 @@ def _validate_profile(profile: Dict[str, Any], item_id: str) -> None:
     out (with a stderr warning carrying the item_id, for post-hoc LLM-violation
     stats), and acceptance requires >= 3 valid tags remaining. Anything short of
     that triggers the caller's retry loop."""
-    assert "mood_vector" in profile and isinstance(profile["mood_vector"], list) \
-        and len(profile["mood_vector"]) == 12, "mood_vector must be a list of 12 floats"
-    assert all(isinstance(x, (int, float)) and 0 <= x <= 1 for x in profile["mood_vector"]), \
-        "mood_vector values must be floats in [0, 1]"
-    assert "intent_vector" in profile and isinstance(profile["intent_vector"], list) \
-        and len(profile["intent_vector"]) == 7, "intent_vector must be a list of 7 floats"
-    assert all(isinstance(x, (int, float)) and 0 <= x <= 1 for x in profile["intent_vector"]), \
-        "intent_vector values must be floats in [0, 1]"
+    if not ("mood_vector" in profile and isinstance(profile["mood_vector"], list)
+            and len(profile["mood_vector"]) == 12):
+        raise ValueError("mood_vector must be a list of 12 floats")
+    if not all(isinstance(x, (int, float)) and 0 <= x <= 1 for x in profile["mood_vector"]):
+        raise ValueError("mood_vector values must be floats in [0, 1]")
+    if not ("intent_vector" in profile and isinstance(profile["intent_vector"], list)
+            and len(profile["intent_vector"]) == 7):
+        raise ValueError("intent_vector must be a list of 7 floats")
+    if not all(isinstance(x, (int, float)) and 0 <= x <= 1 for x in profile["intent_vector"]):
+        raise ValueError("intent_vector values must be floats in [0, 1]")
 
-    assert "aesthetic_tags" in profile and isinstance(profile["aesthetic_tags"], list), \
-        "aesthetic_tags must be a list"
+    if not ("aesthetic_tags" in profile and isinstance(profile["aesthetic_tags"], list)):
+        raise ValueError("aesthetic_tags must be a list")
     raw_tags = profile["aesthetic_tags"]
     valid = [t for t in raw_tags if t in VALID_TAGS]
     invalid = [t for t in raw_tags if t not in VALID_TAGS]
@@ -232,14 +234,16 @@ def _validate_profile(profile: Dict[str, Any], item_id: str) -> None:
         )
     if len(valid) > 5:
         valid = valid[:5]
-    assert len(valid) >= 3, \
-        f"only {len(valid)} valid tags remain after filtering (need >= 3); raw={raw_tags}"
+    if len(valid) < 3:
+        raise ValueError(
+            f"only {len(valid)} valid tags remain after filtering (need >= 3); raw={raw_tags}"
+        )
     profile["aesthetic_tags"] = valid
 
-    assert "vibe_summary" in profile and isinstance(profile["vibe_summary"], str), \
-        "vibe_summary must be a string"
-    assert "reasoning" in profile and isinstance(profile["reasoning"], str), \
-        "reasoning must be a string"
+    if not ("vibe_summary" in profile and isinstance(profile["vibe_summary"], str)):
+        raise ValueError("vibe_summary must be a string")
+    if not ("reasoning" in profile and isinstance(profile["reasoning"], str)):
+        raise ValueError("reasoning must be a string")
 
 
 async def generate_profile(item: Dict[str, Any]) -> "tuple[Dict[str, Any], int]":

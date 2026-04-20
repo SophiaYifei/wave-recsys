@@ -415,7 +415,7 @@ def collect_films(target_count: int = 600) -> None:
 #   Path 3: individual poems via PoetryDB
 # ---------------------------------------------------------------------------
 
-USER_AGENT = "wave-recsys/0.1 (academic project; contact: cnguoyifei@gmail.com)"
+USER_AGENT = "wave-recsys/0.1 (academic project)"
 
 WRITING_RSS_FEEDS: List[Tuple[str, str]] = [
     ("Aeon", "https://aeon.co/feed.rss"),

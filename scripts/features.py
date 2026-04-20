@@ -87,7 +87,7 @@ def build() -> None:
         sys.exit(1)
     if not PROFILES_PATH.exists():
         print(
-            f"ERROR: {PROFILES_PATH} not found; run profile.py --step=profile first",
+            f"ERROR: {PROFILES_PATH} not found; run generate_profiles.py --step=profile first",
             file=sys.stderr,
         )
         sys.exit(1)

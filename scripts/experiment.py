@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import subprocess
 import sys
@@ -32,7 +33,7 @@ SWEEP_PNG = OUTPUTS_DIR / "hyperparam_sweep.png"
 TRANSFER_JSON = OUTPUTS_DIR / "cross_modal_transfer.json"
 TRANSFER_PNG = OUTPUTS_DIR / "modality_entropy.png"
 
-PYTHON = "/opt/homebrew/Caskroom/miniconda/base/envs/wave/bin/python"
+PYTHON = os.environ.get("WAVE_PYTHON", sys.executable)
 
 
 # ---------------------------------------------------------------------------
