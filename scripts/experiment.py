@@ -84,12 +84,13 @@ def _run_train(args_list: List[str]) -> Dict[str, Any]:
 
 
 def hyperparam_sweep() -> None:
-    """Sweep embed_dim ∈ {64, 128, 256, 512} at max_epochs=40 (spec §5.6);
+    """Sweep embed_dim ∈ {32, 64, 128, 256, 512} at max_epochs=40 (spec §5.6);
     add 128/20 and 128/60 to quantify the effect of training length at the
     default embed_dim. The 128/20 result is our Phase E baseline (NDCG@10=0.20);
     we rerun it here so results live in one table for reproducibility."""
 
     configs: List[Dict[str, int]] = [
+        {"embed_dim": 32, "max_epochs": 40},
         {"embed_dim": 64, "max_epochs": 40},
         {"embed_dim": 128, "max_epochs": 40},
         {"embed_dim": 256, "max_epochs": 40},

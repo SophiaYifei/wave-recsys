@@ -85,7 +85,7 @@ Test split: 1,006 paraphrase queries held out (80/10/10 stratified by modality).
 Three take-aways that structure the report:
 
 - **Two-Tower lifts NDCG@10 by 162× over popularity and ~2.9× over KNN.** The no-intent ablation (trained at the same `d128/e20` config as the base it is ablated against) drops NDCG@10 from 0.2002 to 0.1645 — a **~18% drop** from removing just the 7-d intent features — so mood-intent decoupling carries independent signal.
-- **Smaller embeddings won.** The hyperparameter sweep over `embed_dim ∈ {64, 128, 256, 512}` at 40 epochs picked `embed_dim=64` as best; larger capacities overfit on a ~10 k-query training set. See `data/outputs/hyperparam_sweep.png`.
+- **Smaller embeddings won — but not the smallest.** The hyperparameter sweep over `embed_dim ∈ {32, 64, 128, 256, 512}` at 40 epochs shows a clear U-shape (d32 underfits at 0.199, d256 and d512 overfit at 0.181 and 0.190), with `embed_dim=64` sitting at the sweet spot at **NDCG@10 = 0.2105**. See `data/outputs/hyperparam_sweep.png`.
 - **Cross-modal transfer has real cost.** Holding out one modality at training time drops NDCG@10 by 30–51% on the full test set (`data/outputs/cross_modal_transfer.json`). The model benefits meaningfully from modality-aware item features — but that benefit is partly paid for in modality-agnostic generalization, which matters for commercial scoping and is honestly flagged in Limitations.
 
 A precision-coverage tension is visible across layers: KNN slightly edges Two-Tower on cross-modal coherence (L2) and LLM-judge scores (L4) because near-uniform weights favour thematic blending, whereas Two-Tower's InfoNCE loss optimizes precise query-to-item retrieval. Both stories are real findings documented in `data/outputs/eval_results.json`.
@@ -228,7 +228,7 @@ The HF dataset stores artifacts flat at the repo root (`catalog.jsonl`, `feature
 
 `scripts/experiment.py` adds two follow-ons:
 
-- `--type=hyperparam_sweep` trains Two-Tower at `embed_dim ∈ {64, 128, 256, 512}` × `max_epochs ∈ {20, 40, 60}`, writes results to JSON + saves the curve as `hyperparam_sweep.png`, and promotes the best config as the canonical `model.pt`.
+- `--type=hyperparam_sweep` trains Two-Tower at `embed_dim ∈ {32, 64, 128, 256, 512}` at `max_epochs=40`, plus `embed_dim=128` at `max_epochs ∈ {20, 60}` for a length-of-training slice, writes results to JSON + saves the curve as `hyperparam_sweep.png`, and (via the companion `--type=train_final`) promotes the best config as the canonical `model.pt`.
 - `--type=cross_modal_transfer` trains four Two-Towers with one modality held out of training at a time, then scores each on the full test split (including the held-out queries). The NDCG@10 gap vs the baseline quantifies how much the model relies on seeing every modality.
 
 10 qualitative case studies are also emitted (`data/outputs/case_studies.json`), sampled from 20 probe queries across four interest categories: `modality_collapse`, `low_coherence`, `high_cross_modal_coherence`, and `knn_two_tower_disagreement`. These are the raw material for the Error Analysis section of the report.
