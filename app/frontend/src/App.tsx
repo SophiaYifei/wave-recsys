@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from "react";
-import { getRecommendations, checkHealth } from "./api";
+import { getRecommendations, swapCard, checkHealth } from "./api";
 import type {
   Modality,
   ModelName,
@@ -46,6 +46,10 @@ export default function App() {
   >(null);
   const [imageError, setImageError] = useState<string | null>(null);
   const imageInputRef = useRef<HTMLInputElement>(null);
+  // Per-modality "already shown" set of item ids; used as exclude list when
+  // swapping so we never loop back to a card the user just rejected.
+  const [excludedIds, setExcludedIds] = useState<Record<string, string[]>>({});
+  const [swappingModality, setSwappingModality] = useState<string | null>(null);
 
   useEffect(() => {
     let alive = true;
@@ -78,10 +82,45 @@ export default function App() {
         image_base64: imageFile?.dataUrl,
       });
       setResult(resp);
+      // Seed the excluded-ids map with whatever came back, so the first swap
+      // on any modality already knows to skip the currently-displayed card.
+      const seeded: Record<string, string[]> = {};
+      for (const [m, cards] of Object.entries(resp.results)) {
+        seeded[m] = cards.map((c) => c.id);
+      }
+      setExcludedIds(seeded);
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err));
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function handleSwap(m: Modality) {
+    if (!result || swappingModality) return;
+    setSwappingModality(m);
+    setError(null);
+    try {
+      const exclude = excludedIds[m] ?? [];
+      const resp = await swapCard({
+        query: query.trim(),
+        modalities: Array.from(modalities),
+        model,
+        image_base64: imageFile?.dataUrl,
+        swap_modality: m,
+        exclude_ids: exclude,
+      });
+      setResult(resp);
+      // The swapped card's id joins the modality's exclude list for future swaps.
+      const newCards = resp.results[m] ?? [];
+      setExcludedIds((prev) => ({
+        ...prev,
+        [m]: Array.from(new Set([...(prev[m] ?? []), ...newCards.map((c) => c.id)])),
+      }));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : String(err));
+    } finally {
+      setSwappingModality(null);
     }
   }
 
@@ -219,7 +258,12 @@ export default function App() {
         {loading && <LoadingStrip />}
 
         {result && !loading && (
-          <Results result={result} onOpenPoem={setOpenPoem} />
+          <Results
+            result={result}
+            onOpenPoem={setOpenPoem}
+            onSwap={handleSwap}
+            swappingModality={swappingModality}
+          />
         )}
 
         {!result && !loading && !error && <HintsList />}
@@ -259,24 +303,18 @@ function ImageUploader({
         className="hidden"
       />
       {imageFile ? (
-        <div className="flex items-center gap-3 rounded border border-muted bg-white px-3 py-2 text-sm">
+        <div className="relative w-fit max-w-full">
           <img
             src={imageFile.dataUrl}
             alt=""
-            className="h-14 w-14 rounded border border-muted object-cover"
+            className="block max-h-[50vh] max-w-full rounded border border-muted bg-white object-contain shadow-sm"
           />
-          <div className="flex min-w-0 flex-col leading-tight">
-            <span className="truncate text-ink">{imageFile.name}</span>
-            <span className="text-xs text-ink/50">
-              {(imageFile.size / 1024).toFixed(0)} KB
-            </span>
-          </div>
           <button
             type="button"
             onClick={onClear}
             disabled={disabled}
             aria-label="remove image"
-            className="ml-auto rounded px-2 text-lg text-ink/40 transition hover:text-red-500 disabled:opacity-40"
+            className="absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-full border border-muted bg-white/95 text-xl leading-none text-ink/60 shadow-sm transition hover:border-red-400 hover:text-red-500 disabled:opacity-40"
           >
             ×
           </button>
@@ -341,9 +379,13 @@ function HintsList() {
 function Results({
   result,
   onOpenPoem,
+  onSwap,
+  swappingModality,
 }: {
   result: RecommendResponse;
   onOpenPoem: (card: ProductCard) => void;
+  onSwap: (m: Modality) => void;
+  swappingModality: string | null;
 }) {
   const { query_profile, results } = result;
   const ordered = MODALITIES.filter(
@@ -368,7 +410,13 @@ function Results({
               {MODALITY_LABEL[m as Modality]}
             </div>
             {results[m].map((card) => (
-              <Card key={card.id} card={card} onOpenPoem={onOpenPoem} />
+              <Card
+                key={card.id}
+                card={card}
+                onOpenPoem={onOpenPoem}
+                onSwap={() => onSwap(m as Modality)}
+                swapping={swappingModality === m}
+              />
             ))}
           </div>
         ))}
@@ -400,9 +448,13 @@ function ProfileBar({ profile }: { profile: QueryProfile }) {
 function Card({
   card,
   onOpenPoem,
+  onSwap,
+  swapping,
 }: {
   card: ProductCard;
   onOpenPoem: (c: ProductCard) => void;
+  onSwap: () => void;
+  swapping: boolean;
 }) {
   const [imgErr, setImgErr] = useState(false);
   const isPoem = card.subtype === "poem";
@@ -439,7 +491,25 @@ function Card({
 
   const body = (
     <>
-      <div className="aspect-[3/4] w-full bg-muted">{cover}</div>
+      <div className="relative aspect-[3/4] w-full bg-muted">
+        {cover}
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (!swapping) onSwap();
+          }}
+          disabled={swapping}
+          aria-label={`swap ${card.modality} recommendation`}
+          title="swap for another"
+          className={`absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-full border border-muted bg-white/90 text-base leading-none text-ink/60 shadow-sm transition hover:border-accent hover:text-accent disabled:opacity-60 ${
+            swapping ? "animate-spin" : ""
+          }`}
+        >
+          ↻
+        </button>
+      </div>
       <div className="space-y-1 p-4">
         <h3 className="font-serif text-lg leading-tight text-ink group-hover:text-accent">
           {card.title}

@@ -47,3 +47,15 @@ export interface RecommendAllResponse {
   // Outer key: model name; inner key: modality; value: list of cards.
   results_by_model: Record<ModelName, Record<string, ProductCard[]>>;
 }
+
+export interface SwapRequest {
+  query: string;
+  modalities?: Modality[];
+  model?: ModelName;
+  image_base64?: string;
+  swap_modality: string;
+  exclude_ids: string[];
+}
+
+// Same shape as RecommendResponse — server returns the full updated state.
+export type SwapResponse = RecommendResponse;
