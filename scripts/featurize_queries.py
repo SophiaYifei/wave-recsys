@@ -217,9 +217,15 @@ def build_npz() -> None:
                 continue
             tag_onehot[row, idx] = 1.0
 
+    # Query modality_onehot is intentionally left as all-zeros. Real user queries
+    # do not carry a modality label, so attributing the source-item modality to
+    # the query would create a train/inference distribution mismatch. InfoNCE
+    # training with per-query modality=source-item-modality discovered a trivial
+    # w_mod=0.989 shortcut in the initial KNN run; zeroing modality_onehot forces
+    # the KNN loss to learn from vibe/mood/intent/tag signals instead.
+    # The 'modalities' string array above still records source modality for
+    # stratified train/val/test split purposes; only the feature vector is zero.
     modality_onehot = np.zeros((len(profiles), len(MODALITY_ORDER)), dtype=np.float32)
-    for row, p in enumerate(profiles):
-        modality_onehot[row, MODALITY_TO_IDX[p["modality"]]] = 1.0
 
     np.savez(
         FEATURES_OUT,
