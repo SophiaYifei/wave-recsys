@@ -39,7 +39,8 @@ class RecommendRequest(BaseModel):
     model: str = Field(default="two_tower")  # "popularity" | "knn" | "two_tower"
     bypass_cache: bool = False  # set true to force a fresh LLM run
     # Full data URL, e.g. "data:image/jpeg;base64,/9j/...". Optional.
-    image_base64: Optional[str] = None
+    # Limit the encoded payload size to avoid oversized request bodies.
+    image_base64: Optional[str] = Field(default=None, max_length=7_000_000)
 
 
 class RecommendResponse(BaseModel):
