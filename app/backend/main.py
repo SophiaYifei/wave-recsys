@@ -268,14 +268,14 @@ def _load_cache_from_disk() -> None:
 async def _save_cache_to_disk() -> None:
     """Atomic write: serialize full cache to tmp file, then rename over target."""
     async with _cache_lock:
-        RECOMMEND_CACHE_PATH.parent.mkdir(parents=True, exist_ok=True)
-        body = {k: v.model_dump() for k, v in _recommend_cache.items()}
-        tmp = RECOMMEND_CACHE_PATH.with_suffix(".json.tmp")
-        with tmp.open("w", encoding="utf-8") as f:
-            json.dump(body, f, ensure_ascii=False, indent=2)
-        tmp.replace(RECOMMEND_CACHE_PATH)
+        snapshot = list(_recommend_cache.items())
 
-
+    RECOMMEND_CACHE_PATH.parent.mkdir(parents=True, exist_ok=True)
+    body = {k: v.model_dump() for k, v in snapshot}
+    tmp = RECOMMEND_CACHE_PATH.with_suffix(".json.tmp")
+    with tmp.open("w", encoding="utf-8") as f:
+        json.dump(body, f, ensure_ascii=False, indent=2)
+    tmp.replace(RECOMMEND_CACHE_PATH)
 @app.get("/health")
 async def health() -> Dict[str, str]:
     return {"status": "ok", "cached_queries": str(len(_recommend_cache))}
