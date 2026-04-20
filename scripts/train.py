@@ -42,6 +42,7 @@ TT_DIR = REPO_ROOT / "models" / "two_tower"
 SPLIT_SEED = 2026
 TRAIN_PCT, VAL_PCT = 0.8, 0.1  # remainder -> test
 DEFAULT_EMBED_DIM = 128
+DEFAULT_MAX_EPOCHS = 20
 TEMPERATURE = 0.1
 
 
@@ -442,10 +443,11 @@ def train_two_tower(args: argparse.Namespace) -> None:
     use_intent = args.ablation != "no_intent"
     holdout = args.holdout_modality
     embed_dim = args.embed_dim
+    max_epochs = args.max_epochs
 
     print(
         f"two_tower: device={device} use_intent={use_intent} "
-        f"holdout={holdout} embed_dim={embed_dim}"
+        f"holdout={holdout} embed_dim={embed_dim} max_epochs={max_epochs}"
     )
 
     items = load_item_features()
@@ -474,7 +476,7 @@ def train_two_tower(args: argparse.Namespace) -> None:
     bad_epochs = 0
     history: List[Dict[str, Any]] = []
 
-    for epoch in range(20):
+    for epoch in range(max_epochs):
         model.train()
         total_loss = 0.0
         n_batches = 0
@@ -535,6 +537,8 @@ def train_two_tower(args: argparse.Namespace) -> None:
         suffix_parts.append(f"holdout_{holdout}")
     if embed_dim != DEFAULT_EMBED_DIM:
         suffix_parts.append(f"d{embed_dim}")
+    if max_epochs != DEFAULT_MAX_EPOCHS:
+        suffix_parts.append(f"e{max_epochs}")
     stem = "model" + ("_" + "_".join(suffix_parts) if suffix_parts else "")
     model_path = TT_DIR / f"{stem}.pt"
     config_path = TT_DIR / "config.pt" if not suffix_parts else TT_DIR / f"{stem}_config.pt"
@@ -593,6 +597,7 @@ def main() -> None:
         default=None,
     )
     parser.add_argument("--embed-dim", type=int, default=DEFAULT_EMBED_DIM)
+    parser.add_argument("--max-epochs", type=int, default=DEFAULT_MAX_EPOCHS)
     parser.add_argument(
         "--device",
         default="cpu",
