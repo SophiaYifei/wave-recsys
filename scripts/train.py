@@ -174,13 +174,20 @@ class QueryTower(nn.Module):
     def __init__(self, output_dim: int = DEFAULT_EMBED_DIM, use_intent: bool = True):
         super().__init__()
         self.use_intent = use_intent
-        in_dim = 384 + 12 + (7 if use_intent else 0)
+        in_dim = 384 + 12 + (7 if use_intent else 0) + 24
         self.mlp = _build_mlp(in_dim, output_dim)
 
-    def forward(self, vibe: torch.Tensor, mood: torch.Tensor, intent: Optional[torch.Tensor]) -> torch.Tensor:
+    def forward(
+        self,
+        vibe: torch.Tensor,
+        mood: torch.Tensor,
+        intent: Optional[torch.Tensor],
+        tag: torch.Tensor,
+    ) -> torch.Tensor:
         parts = [vibe, mood]
         if self.use_intent:
             parts.append(intent)
+        parts.append(tag)
         return F.normalize(self.mlp(torch.cat(parts, dim=-1)), dim=-1)
 
 
@@ -222,7 +229,10 @@ class TwoTower(nn.Module):
 
     def encode_query(self, q: Dict[str, torch.Tensor]) -> torch.Tensor:
         return self.query_tower(
-            q["vibe"], q["mood"], q.get("intent") if self.use_intent else None
+            q["vibe"],
+            q["mood"],
+            q.get("intent") if self.use_intent else None,
+            q["tag"],
         )
 
     def encode_item(self, i: Dict[str, torch.Tensor]) -> torch.Tensor:

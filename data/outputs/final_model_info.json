@@ -1,7 +1,7 @@
 {
   "embed_dim": 64,
   "max_epochs": 40,
-  "test_NDCG@10": 0.2105,
-  "best_epoch": 25,
+  "test_NDCG@10": 0.2137,
+  "best_epoch": 17,
   "promoted_from": "model_d64_e40.pt"
 }

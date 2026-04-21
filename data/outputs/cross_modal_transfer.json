@@ -1,45 +1,45 @@
 {
-  "baseline_NDCG@10": 0.2002275630057956,
+  "baseline_NDCG@10": 0.21372813353638873,
   "holdouts": {
     "book": {
-      "test_NDCG@10": 0.1216,
-      "test_P@10": 0.2376,
-      "test_MAP@10": 0.0864,
-      "test_NDCG@5": 0.0934,
-      "test_P@5": 0.1504,
-      "best_epoch": 17,
-      "best_val_NDCG@10": 0.1856,
-      "elapsed_sec": 5.673640251159668
+      "test_NDCG@10": 0.1545,
+      "test_P@10": 0.2925,
+      "test_MAP@10": 0.1129,
+      "test_NDCG@5": 0.1184,
+      "test_P@5": 0.1809,
+      "best_epoch": 18,
+      "best_val_NDCG@10": 0.2018,
+      "elapsed_sec": 6.243775367736816
     },
     "film": {
-      "test_NDCG@10": 0.14,
-      "test_P@10": 0.2677,
-      "test_MAP@10": 0.1016,
-      "test_NDCG@5": 0.1068,
-      "test_P@5": 0.1645,
-      "best_epoch": 16,
-      "best_val_NDCG@10": 0.1735,
-      "elapsed_sec": 5.621644973754883
+      "test_NDCG@10": 0.1562,
+      "test_P@10": 0.2963,
+      "test_MAP@10": 0.1138,
+      "test_NDCG@5": 0.1217,
+      "test_P@5": 0.1893,
+      "best_epoch": 13,
+      "best_val_NDCG@10": 0.2042,
+      "elapsed_sec": 4.963944911956787
     },
     "music": {
-      "test_NDCG@10": 0.1052,
-      "test_P@10": 0.2065,
-      "test_MAP@10": 0.0747,
-      "test_NDCG@5": 0.0794,
-      "test_P@5": 0.1263,
-      "best_epoch": 19,
-      "best_val_NDCG@10": 0.1858,
-      "elapsed_sec": 5.699841022491455
+      "test_NDCG@10": 0.1116,
+      "test_P@10": 0.2181,
+      "test_MAP@10": 0.0795,
+      "test_NDCG@5": 0.0845,
+      "test_P@5": 0.1339,
+      "best_epoch": 24,
+      "best_val_NDCG@10": 0.2162,
+      "elapsed_sec": 6.3964879512786865
     },
     "writing": {
-      "test_NDCG@10": 0.0987,
-      "test_P@10": 0.1883,
-      "test_MAP@10": 0.0717,
-      "test_NDCG@5": 0.0763,
-      "test_P@5": 0.1187,
-      "best_epoch": 10,
-      "best_val_NDCG@10": 0.1745,
-      "elapsed_sec": 3.819648027420044
+      "test_NDCG@10": 0.1199,
+      "test_P@10": 0.2255,
+      "test_MAP@10": 0.0879,
+      "test_NDCG@5": 0.0948,
+      "test_P@5": 0.1474,
+      "best_epoch": 9,
+      "best_val_NDCG@10": 0.2139,
+      "elapsed_sec": 3.5064592361450195
     }
   }
 }

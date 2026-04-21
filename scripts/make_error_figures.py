@@ -225,11 +225,11 @@ def make_style_b(
 def main() -> None:
     produced: List[tuple] = []
 
-    # Figure 1 — Style A, modality-collapse breakup query.
+    # Figure 1 — Style A, modality-collapse doomscrolling query (TT entropy 0.0).
     p = make_style_a(
-        case_id="case_00",
-        title='Case 1: "music for studying after a breakup"',
-        out_path=OUT_DIR / "error_case_1_modality_collapse_breakup.png",
+        case_id="case_11",
+        title='Case 1: "something to stop me doomscrolling"',
+        out_path=OUT_DIR / "error_case_1_modality_collapse_doomscrolling.png",
     )
     produced.append(p)
 
@@ -251,24 +251,24 @@ def main() -> None:
 
     # Figure 4 — Style B, KNN + Two-Tower only, colour-coded borders.
     p = make_style_b(
-        case_id="case_17",
+        case_id="case_12",
         rows=["knn", "two_tower"],
         title="Case 4: KNN matches aesthetic tags; Two-Tower drifts",
-        out_path=OUT_DIR / "error_case_4_convenience_store.png",
+        out_path=OUT_DIR / "error_case_4_air_before_snow.png",
         figsize=(12, 4),
         row_styles={
             "knn":       {"linewidth": 2, "edgecolor": "seagreen"},
             "two_tower": {"linewidth": 2, "edgecolor": "darkorange"},
         },
-        bottom_caption="Query aesthetic tags: liminal, nocturnal, neon, glass, mundane",
+        bottom_caption="Query aesthetic tags: minimalist, glass, austere, japandi",
     )
     produced.append(p)
 
-    # Figure 5 — Style A, modality-collapse case.
+    # Figure 5 — Style A, modality-collapse rain-on-glass case (entropy 0.199).
     p = make_style_a(
-        case_id="case_01",
-        title='Case 5: "something to watch at 3am when I can\'t sleep"',
-        out_path=OUT_DIR / "error_case_5_modality_collapse_3am.png",
+        case_id="case_07",
+        title='Case 5: "something quiet and slow, like rain on glass"',
+        out_path=OUT_DIR / "error_case_5_modality_collapse_rain.png",
     )
     produced.append(p)
 
