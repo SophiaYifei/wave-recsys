@@ -38,8 +38,6 @@ sys.path.insert(0, str(REPO_ROOT))
 
 from app.backend.llm_client import get_client  # noqa: E402
 
-load_dotenv()
-
 CATALOG_PATH = REPO_ROOT / "data" / "processed" / "catalog.jsonl"
 PROFILES_PATH = REPO_ROOT / "data" / "processed" / "profiles.jsonl"
 PARAPHRASE_PATH = REPO_ROOT / "data" / "processed" / "paraphrase_queries.jsonl"
@@ -583,6 +581,7 @@ async def run_paraphrase_step(
 
 
 def main() -> None:
+    load_dotenv()
     parser = argparse.ArgumentParser(description="LLM profile + paraphrase generation.")
     parser.add_argument("--step", required=True, choices=["profile", "paraphrase"])
     parser.add_argument("--concurrency", type=int, default=10)
