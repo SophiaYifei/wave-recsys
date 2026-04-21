@@ -25,8 +25,6 @@ from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 from tqdm import tqdm
 
-load_dotenv()
-
 REPO_ROOT = Path(__file__).resolve().parent.parent
 RAW_DIR = REPO_ROOT / "data" / "raw"
 
@@ -1082,6 +1080,7 @@ SOURCE_DEFAULTS = {
 
 
 def main() -> None:
+    load_dotenv()
     parser = argparse.ArgumentParser(description="Collect raw catalog data per modality.")
     parser.add_argument(
         "--source",

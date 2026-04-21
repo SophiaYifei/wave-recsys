@@ -42,8 +42,6 @@ from generate_profiles import (  # noqa: E402
     _validate_profile,
 )
 
-load_dotenv()
-
 PARAPHRASE_JSONL = REPO_ROOT / "data" / "processed" / "paraphrase_queries.jsonl"
 PROFILES_CACHE = REPO_ROOT / "data" / "processed" / "paraphrase_query_profiles.jsonl"
 FEATURES_OUT = REPO_ROOT / "data" / "processed" / "paraphrase_queries_featurized.npz"
@@ -245,6 +243,7 @@ def build_npz() -> None:
 
 
 def main() -> None:
+    load_dotenv()
     parser = argparse.ArgumentParser(description="Featurize paraphrase queries.")
     parser.add_argument("--step", choices=["profile", "build", "all"], default="all")
     parser.add_argument("--concurrency", type=int, default=10)

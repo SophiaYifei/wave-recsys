@@ -14,6 +14,24 @@
 
 <!-- ![Wave results for "something quiet and slow, like rain on glass"](docs/screenshot.png) -->
 
+## Quick start (≈3 minutes)
+
+```bash
+git clone https://github.com/SophiaYifei/wave-recsys.git
+cd wave-recsys
+python3.11 -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+
+export HF_REPO_ID=YifeiGuo/wave-artifacts
+export OPENROUTER_API_KEY=sk-or-...        # for on-demand query profile generation
+python setup.py --step bootstrap           # pulls ~15 MB of artifacts from HuggingFace
+python app.py                              # http://localhost:8000  (OpenAPI at /docs)
+```
+
+No data collection or training needed — the canonical Two-Tower model, KNN weights, item features, catalog, and profiles are all downloaded from the public HuggingFace dataset on first boot.
+
+For the full data→train→eval pipeline, see [§ Run it locally](#run-it-locally) below.
+
 ## Motivation
 
 Most consumer recommenders surface a single affect axis per interaction — Spotify's "mood" playlists, Netflix genre rows, Goodreads similar-reads. This collapses the difference between "I am sad" and "I want to be held while I am sad."

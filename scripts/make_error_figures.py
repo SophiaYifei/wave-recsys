@@ -19,17 +19,16 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 import matplotlib
-matplotlib.use("Agg")
+matplotlib.use("Agg")  # module-level: matplotlib requires this before pyplot import
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 
 REPO = Path(__file__).resolve().parent.parent
 CASES_PATH = REPO / "data" / "outputs" / "case_studies.json"
 OUT_DIR = REPO / "figures"
-OUT_DIR.mkdir(parents=True, exist_ok=True)
 
-# Academic sans-serif defaults — no seaborn, no fancy cmaps.
-plt.rcParams.update({
+# Academic sans-serif defaults — no seaborn, no fancy cmaps. Applied in main().
+RCPARAMS = {
     "font.family": "sans-serif",
     "font.sans-serif": ["Helvetica", "Arial", "DejaVu Sans"],
     "font.size": 10,
@@ -41,7 +40,7 @@ plt.rcParams.update({
     "ytick.color": "#333",
     "savefig.facecolor": "white",
     "figure.facecolor": "white",
-})
+}
 
 MODEL_STYLES = {
     "popularity":  {"color": "#777777", "marker": "s", "label": "Popularity"},
@@ -223,6 +222,8 @@ def make_style_b(
 
 
 def main() -> None:
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    plt.rcParams.update(RCPARAMS)
     produced: List[tuple] = []
 
     # Figure 1 — Style A, modality-collapse doomscrolling query (TT entropy 0.0).

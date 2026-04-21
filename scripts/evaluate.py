@@ -66,8 +66,6 @@ from train import (  # noqa: E402
     load_query_features,
 )
 
-load_dotenv()
-
 JUDGE_MODEL = "openai/gpt-5.4-nano"
 CATALOG_PATH = REPO_ROOT / "data" / "processed" / "catalog.jsonl"
 PARAPHRASE_JSONL = REPO_ROOT / "data" / "processed" / "paraphrase_queries.jsonl"
@@ -889,6 +887,7 @@ async def run_evaluation(
 
 
 def main() -> None:
+    load_dotenv()
     parser = argparse.ArgumentParser(description="Four-layer evaluation.")
     parser.add_argument(
         "--model",
